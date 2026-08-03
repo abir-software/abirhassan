@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initModeSwitch();
   initCursorToggle();
   initContactForm();
-  initSmoothScroll();
+  initAnchorScroll();
 
   // Init animations (after content is rendered)
   requestAnimationFrame(async () => {

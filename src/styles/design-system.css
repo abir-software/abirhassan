@@ -27,10 +27,14 @@
   --color-text-accent: var(--color-accent);
 
   /* Glass */
-  --glass-bg: transparent;
-  --glass-border: rgba(96, 165, 250, 0.12);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --glass-blur: 16px;
+  --glass-bg: linear-gradient(135deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.1) 100%);
+  --glass-border: rgba(96, 165, 250, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --glass-blur: 6px;
+
+  /* Shadows */
+  --text-shadow-glow: 0 0 10px rgba(96, 165, 250, 0.5), 0 0 20px rgba(96, 165, 250, 0.3);
+  --text-shadow-solid: 2px 2px 4px rgba(0, 0, 0, 0.8);
 
   /* Gradients */
   --gradient-accent: linear-gradient(135deg, var(--color-accent) 0%, var(--color-gold) 100%);

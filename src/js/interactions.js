@@ -162,7 +162,7 @@ export function initContactForm() {
         }
     });
 }
-export function initSmoothScroll() {
+export function initAnchorScroll() {
     const links = document.querySelectorAll('a[href^="#"], a[href^="index.html#"]');
 
     links.forEach(link => {

@@ -246,8 +246,8 @@ export async function renderNavigation() {
   }
 
   // Re-init smooth scroll for dynamic links
-  const { initSmoothScroll } = await import('./interactions.js');
-  initSmoothScroll();
+  const { initAnchorScroll } = await import('./interactions.js');
+  initAnchorScroll();
 
   if (footerNav) {
     const footerItems = navItems.filter(n => n.location === 'footer');
