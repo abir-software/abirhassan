@@ -1,0 +1,86 @@
+.scroll-robot-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(15, 32, 64, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 990;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s, transform 0.4s, border-color 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-robot-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-robot-container:hover {
+    border-color: #60a5fa;
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
+    transform: translateY(-3px);
+}
+
+.scroll-robot-icon {
+    width: 24px;
+    height: 24px;
+    color: #94a3b8;
+    transition: color 0.3s;
+    position: absolute;
+}
+
+.scroll-robot-container:hover .scroll-robot-icon {
+    color: #ffffff;
+}
+
+.scroll-robot {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    opacity: 0;
+    transform: scale(0);
+    pointer-events: none;
+}
+
+.robot-particle {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 980;
+    mix-blend-mode: screen;
+}
+
+.robot-antenna {
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+    from {
+        fill: #ef4444;
+        opacity: 1;
+    }
+
+    to {
+        fill: #b91c1c;
+        opacity: 0.5;
+    }
+}
+
+@media (max-width: 768px) {
+    .scroll-robot-container {
+        bottom: 20px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+    }
+}

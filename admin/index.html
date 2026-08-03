@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Admin — Md Abir Hassan</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+</head>
+
+<body>
+
+    <!-- ════════════════════════════════════
+     LOGIN SCREEN
+════════════════════════════════════ -->
+    <div id="login-screen">
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="logo-icon">✦</div>
+                <h1>Portfolio CMS</h1>
+                <p>Admin Panel — Md Abir Hassan</p>
+            </div>
+            <div id="login-error" class="login-error">Invalid username or password</div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="login-username" placeholder="abirhassan2" autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+            </div>
+            <button class="btn-login" onclick="doLogin()">Sign In →</button>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+     MAIN APP
+════════════════════════════════════ -->
+    <div id="app">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">✦</div>
+                <div class="sidebar-title">Portfolio CMS<small>Content Manager</small></div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section-label">Overview</div>
+                <div class="nav-item active" data-panel="dashboard"><span class="nav-icon">📊</span>Dashboard</div>
+
+                <div class="nav-section-label">Content</div>
+                <div class="nav-item" data-panel="hero"><span class="nav-icon">🏠</span>Hero Section</div>
+                <div class="nav-item" data-panel="projects"><span class="nav-icon">🚀</span>Projects</div>
+                <div class="nav-item" data-panel="blog"><span class="nav-icon">📝</span>Blog Posts</div>
+                <div class="nav-item" data-panel="experience"><span class="nav-icon">💼</span>Experience</div>
+                <div class="nav-item" data-panel="skills"><span class="nav-icon">🧪</span>Skills</div>
+                <div class="nav-item" data-panel="education"><span class="nav-icon">🎓</span>Education</div>
+
+                <div class="nav-section-label">Media</div>
+                <div class="nav-item" data-panel="media"><span class="nav-icon">🖼️</span>Media Library</div>
+
+                <div class="nav-section-label">Communication</div>
+                <div class="nav-item" data-panel="contact"><span class="nav-icon">📩</span>Contact <span
+                        class="nav-badge" id="unread-badge" style="display:none">0</span></div>
+
+                <div class="nav-section-label">System</div>
+                <div class="nav-item" data-panel="navigation"><span class="nav-icon">🗺️</span>Site Nav</div>
+                <div class="nav-item" data-panel="testimonials"><span class="nav-icon">💬</span>Testimonials</div>
+                <div class="nav-item" data-panel="settings"><span class="nav-icon">⚙️</span>Settings</div>
+                <div class="nav-item" data-panel="backup"><span class="nav-icon">💾</span>Backup/Restore</div>
+                <div class="nav-item" data-panel="activity"><span class="nav-icon">📋</span>Activity Log</div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar">A</div>
+                    <div>
+                        <div class="user-name" id="user-display">Admin</div>
+                        <div class="user-role">Administrator</div>
+                    </div>
+                    <button class="logout-btn" onclick="doLogout()" title="Logout">⏻</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-title" id="topbar-title">Dashboard</div>
+                <div class="topbar-actions">
+                    <a href="/" target="_blank" class="view-site-btn">View Site ↗</a>
+                </div>
+            </header>
+
+            <div class="content-area">
+
+                <!-- ─────────── DASHBOARD ─────────── -->
+                <div class="panel active" id="panel-dashboard">
+                    <div class="stats-grid" id="dash-stats"></div>
+                    <div class="grid-2 mt-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">📈 Top Blogs</div>
+                            </div>
+                            <div id="dash-top-blogs"></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">💬 Recent Messages</div>
+                            </div>
+                            <div id="dash-recent-msgs"></div>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <div class="card-title">🕐 Recent Activity</div>
+                        </div>
+                        <div id="dash-activity"></div>
+                    </div>
+                </div>
+
+                <!-- ─────────── HERO ─────────── -->
+                <div class="panel" id="panel-hero">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Hero Section Editor</div>
+                            <button class="btn btn-primary" onclick="saveHero()">💾 Save Changes</button>
+                        </div>
+                        <div class="form-row">
+                            <div class="field"><label>Full Name</label><input type="text" id="hero-name"
+                                    placeholder="Md Abir Hassan"></div>
+                            <div class="field"><label>Current Role</label><input type="text" id="hero-role"
+                                    placeholder="Jr. Software Engineer"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="field"><label>Company</label><input type="text" id="hero-company"></div>
+                            <div class="field"><label>Profile Image URL</label><input type="text" id="hero-image"
+                                    placeholder="/uploads/photo.jpg"></div>
+                        </div>
+                        <div class="field"><label>Summary / Bio</label><textarea id="hero-summary" rows="4"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="field"><label>Primary CTA Button</label><input type="text" id="hero-cta1"
+                                    placeholder="View Projects"></div>
+                            <div class="field"><label>Secondary CTA Button</label><input type="text" id="hero-cta2"
+                                    placeholder="Download CV"></div>
+                        </div>
+                        <div class="field">
+                            <label>Typing Titles (comma-separated)</label>
+                            <input type="text" id="hero-titles"
+                                placeholder="Software Engineer, QA Specialist, Frontend Developer">
+                            <div class="hint">These rotate in the hero typing animation</div>
+                        </div>
+                        <div class="form-section-title mt-2">Statistics / Counters</div>
+                        <div id="hero-stats-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addHeroStat()">+ Add Stat</button>
+                    </div>
+                </div>
+
+                <!-- ─────────── PROJECTS ─────────── -->
+                <div class="panel" id="panel-projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Projects Manager</div>
+                            <button class="btn btn-primary" onclick="openProjectModal()">+ New Project</button>
+                        </div>
+                        <div style="margin-bottom:1rem; display:flex; gap:.5rem; flex-wrap:wrap;">
+                            <button class="btn btn-ghost btn-sm" onclick="filterProjects('all')">All</button>
+                            <button class="btn btn-ghost btn-sm" onclick="filterProjects('qa')">🧪 QA</button>
+                            <button class="btn btn-ghost btn-sm" onclick="filterProjects('pm')">📊 PM</button>
+                            <button class="btn btn-ghost btn-sm" onclick="filterProjects('web')">🌐 Web</button>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Org</th>
+                                        <th>Category</th>
+                                        <th>Tags</th>
+                                        <th>Featured</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="projects-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─────────── BLOG ─────────── -->
+                <div class="panel" id="panel-blog">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Blog Manager</div>
+                            <button class="btn btn-primary" onclick="openBlogModal()">+ New Post</button>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Reads</th>
+                                        <th>Featured</th>
+                                        <th>Top</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="blogs-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─────────── EXPERIENCE ─────────── -->
+                <div class="panel" id="panel-experience">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Experience</div>
+                            <button class="btn btn-primary" onclick="openExpModal()">+ Add Role</button>
+                        </div>
+                        <div id="experience-list"></div>
+                    </div>
+                </div>
+
+                <!-- ─────────── SKILLS ─────────── -->
+                <div class="panel" id="panel-skills">
+                    <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+                        <button class="btn btn-ghost btn-sm"
+                            onclick="showSkillTab('competencies')">Competencies</button>
+                        <button class="btn btn-ghost btn-sm" onclick="showSkillTab('expertise')">Expertise</button>
+                        <button class="btn btn-ghost btn-sm" onclick="showSkillTab('qa')">QA Tools</button>
+                        <button class="btn btn-ghost btn-sm" onclick="showSkillTab('web')">Web Skills</button>
+                        <button class="btn btn-ghost btn-sm" onclick="showSkillTab('workflow')">Workflow</button>
+                    </div>
+                    <div class="card" id="skills-competencies-panel">
+                        <div class="card-header">
+                            <div class="card-title">Core Competencies</div><button class="btn btn-primary"
+                                onclick="saveCompetencies()">💾 Save</button>
+                        </div>
+                        <div id="competencies-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addCompetency()">+ Add Competency</button>
+                    </div>
+                    <div class="card" id="skills-expertise-panel" style="display:none;">
+                        <div class="card-header">
+                            <div class="card-title">Expertise Cards</div><button class="btn btn-primary"
+                                onclick="saveExpertise()">💾 Save</button>
+                        </div>
+                        <div id="expertise-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addExpertise()">+ Add Card</button>
+                    </div>
+                    <div class="card" id="skills-qa-panel" style="display:none;">
+                        <div class="card-header">
+                            <div class="card-title">QA Tools</div><button class="btn btn-primary"
+                                onclick="saveQATools()">💾 Save</button>
+                        </div>
+                        <div id="qa-tools-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addQATool()">+ Add Tool</button>
+                    </div>
+                    <div class="card" id="skills-web-panel" style="display:none;">
+                        <div class="card-header">
+                            <div class="card-title">Web Dev Skills</div><button class="btn btn-primary"
+                                onclick="saveWebSkills()">💾 Save</button>
+                        </div>
+                        <div id="web-skills-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addWebSkill()">+ Add Skill</button>
+                    </div>
+                    <div class="card" id="skills-workflow-panel" style="display:none;">
+                        <div class="card-header">
+                            <div class="card-title">Workflow Steps</div><button class="btn btn-primary"
+                                onclick="saveWorkflow()">💾 Save</button>
+                        </div>
+                        <div id="workflow-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addWorkflowStep()">+ Add Step</button>
+                    </div>
+                </div>
+
+                <!-- ─────────── EDUCATION ─────────── -->
+                <div class="panel" id="panel-education">
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">🎓 Degrees</div>
+                                <button class="btn btn-primary btn-sm" onclick="openEduModal('degree')">+ Add</button>
+                            </div>
+                            <div id="edu-degrees-list"></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">📋 Certifications</div>
+                                <button class="btn btn-primary btn-sm" onclick="openEduModal('cert')">+ Add</button>
+                            </div>
+                            <div id="edu-certs-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─────────── MEDIA ─────────── -->
+                <div class="panel" id="panel-media">
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <div class="card-title">Upload Files</div>
+                            <select id="media-folder-select"
+                                style="padding:.4rem .75rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-family:inherit;">
+                                <option value="general">general</option>
+                                <option value="profile">profile</option>
+                                <option value="projects">projects</option>
+                                <option value="blog">blog</option>
+                            </select>
+                        </div>
+                        <div class="upload-area" id="upload-drop"
+                            onclick="document.getElementById('file-input').click()">
+                            <div style="font-size:2rem;margin-bottom:.5rem">☁️</div>
+                            <p>Click or drag & drop images here<br><small>JPG, PNG, WebP, GIF, SVG — Max 10MB
+                                    each</small></p>
+                        </div>
+                        <input type="file" id="file-input" multiple accept="image/*,.pdf" style="display:none"
+                            onchange="uploadFiles(this.files)">
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Media Library</div><button class="btn btn-ghost btn-sm"
+                                onclick="loadMedia()">↺ Refresh</button>
+                        </div>
+                        <div class="media-grid" id="media-grid"></div>
+                    </div>
+                </div>
+
+                <!-- ─────────── CONTACT ─────────── -->
+                <div class="panel" id="panel-contact">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Contact Submissions</div>
+                            <div style="display:flex;gap:.5rem">
+                                <button class="btn btn-ghost btn-sm" onclick="loadContact('unread')">Unread</button>
+                                <button class="btn btn-ghost btn-sm" onclick="loadContact('read')">Read</button>
+                                <button class="btn btn-ghost btn-sm" onclick="loadContact()">All</button>
+                            </div>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Subject</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contact-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─────────── SETTINGS ─────────── -->
+                <div class="panel" id="panel-settings">
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">🎨 Theme & Colors</div><button class="btn btn-primary"
+                                    onclick="saveSettings()">💾 Save</button>
+                            </div>
+                            <div class="field"><label>Primary Color</label>
+                                <div class="flex-center gap-1"><input type="color" id="s-primary-color"><input
+                                        type="text" id="s-primary-hex" placeholder="#6c63ff" style="flex:1"></div>
+                            </div>
+                            <div class="field"><label>Secondary Color</label>
+                                <div class="flex-center gap-1"><input type="color" id="s-secondary-color"><input
+                                        type="text" id="s-secondary-hex" placeholder="#f50057" style="flex:1"></div>
+                            </div>
+                            <div class="field"><label>Accent Color</label>
+                                <div class="flex-center gap-1"><input type="color" id="s-accent-color"><input
+                                        type="text" id="s-accent-hex" placeholder="#00f5ff" style="flex:1"></div>
+                            </div>
+                            <div class="field"><label>Font Family</label>
+                                <select id="s-font">
+                                    <option value="Inter">Inter</option>
+                                    <option value="Roboto">Roboto</option>
+                                    <option value="Outfit">Outfit</option>
+                                    <option value="Poppins">Poppins</option>
+                                    <option value="Sora">Sora</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">🌐 Site Info</div>
+                            </div>
+                            <div class="field"><label>Site Title</label><input type="text" id="s-title"></div>
+                            <div class="field"><label>Tagline</label><input type="text" id="s-tagline"></div>
+                            <div class="field"><label>Email</label><input type="email" id="s-email"></div>
+                            <div class="field"><label>Phone</label><input type="text" id="s-phone"></div>
+                            <div class="field"><label>Location</label><input type="text" id="s-location"></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">🔗 Social Links</div>
+                            </div>
+                            <div class="field"><label>LinkedIn</label><input type="url" id="s-linkedin"></div>
+                            <div class="field"><label>GitHub</label><input type="url" id="s-github"></div>
+                            <div class="field"><label>Twitter/X</label><input type="url" id="s-twitter"></div>
+                            <div class="field"><label>Facebook</label><input type="url" id="s-facebook"></div>
+                            <div class="field"><label>CV / Resume URL</label><input type="url" id="s-cv-url"></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">🔒 Security</div>
+                            </div>
+                            <div class="field"><label>New Password</label><input type="password" id="s-new-password"
+                                    placeholder="Leave blank to keep current"></div>
+                            <div class="field"><label>Current Password (required to change)</label><input
+                                    type="password" id="s-old-password"></div>
+                            <button class="btn btn-ghost" onclick="changePassword()">Update Password</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─────────── TESTIMONIALS ─────────── -->
+                <div class="panel" id="panel-testimonials">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Testimonials</div>
+                            <button class="btn btn-primary" onclick="openTestimonialModal()">+ Add New</button>
+                        </div>
+                        <div id="testimonials-list"></div>
+                    </div>
+                </div>
+
+                <!-- ─────────── SITE NAVIGATION ─────────── -->
+                <div class="panel" id="panel-navigation">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Site Navigation (Menus)</div>
+                            <button class="btn btn-primary" onclick="openNavModal()">+ Add Link</button>
+                        </div>
+                        <div class="form-section-title">Header Navigation</div>
+                        <div id="nav-header-list" class="mb-2"></div>
+                        <div class="form-section-title">Footer Links</div>
+                        <div id="nav-footer-list"></div>
+                    </div>
+                </div>
+
+                <!-- ─────────── BACKUP & RESTORE ─────────── -->
+                <div class="panel" id="panel-backup">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">System Backup & Restore</div>
+                        </div>
+                        <div class="p-2">
+                            <div class="mb-2">
+                                <h3>Export Database</h3>
+                                <p class="text-muted text-sm mb-1">Download your entire portfolio data as a JSON file.
+                                </p>
+                                <button class="btn btn-primary" onclick="exportData()">⬇️ Download Backup
+                                    (JSON)</button>
+                            </div>
+                            <hr style="margin:2rem 0; opacity:0.1">
+                            <div>
+                                <h3>Restore Database</h3>
+                                <p class="text-muted text-sm mb-1">Upload a previous backup file. <strong
+                                        class="text-danger">Warning: This will overwrite all current data!</strong></p>
+                                <div class="upload-area" style="padding:2rem;"
+                                    onclick="document.getElementById('import-input').click()">
+                                    <p>Select JSON Backup File</p>
+                                </div>
+                                <input type="file" id="import-input" accept=".json" style="display:none"
+                                    onchange="importData(this.files[0])">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─────────── ACTIVITY LOG ─────────── -->
+                <div class="panel" id="panel-activity">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Activity Log</div><button class="btn btn-ghost btn-sm"
+                                onclick="loadActivity()">↺ Refresh</button>
+                        </div>
+                        <div id="activity-log-list"></div>
+                    </div>
+                </div>
+
+            </div><!-- /content-area -->
+        </main>
+    </div><!-- /app -->
+
+    <!-- ════════════════════════════════════
+     MODALS
+════════════════════════════════════ -->
+
+    <!-- Project Modal -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="project-modal-title">New Project</div>
+                <button class="modal-close" onclick="closeModal('project-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="pm-id">
+                <div class="form-row">
+                    <div class="field"><label>Title *</label><input type="text" id="pm-title"></div>
+                    <div class="field"><label>Organization</label><input type="text" id="pm-org"></div>
+                </div>
+                <div class="form-row">
+                    <div class="field"><label>Category</label>
+                        <select id="pm-category">
+                            <option value="qa">QA/Testing</option>
+                            <option value="pm">Project Management</option>
+                            <option value="web">Web Development</option>
+                        </select>
+                    </div>
+                    <div class="field"><label>Image URL</label><input type="text" id="pm-image"
+                            placeholder="/uploads/..."></div>
+                </div>
+                <div class="field"><label>Description</label><textarea id="pm-desc" rows="3"></textarea></div>
+                <div class="field"><label>Tags (comma-separated)</label><input type="text" id="pm-tags"
+                        placeholder="ERP, QA, Testing"></div>
+                <div class="flex gap-2 mt-1">
+                    <label class="toggle-field"><label class="toggle"><input type="checkbox" id="pm-featured"><span
+                                class="toggle-slider"></span></label> Featured on Homepage</label>
+                    <label class="toggle-field"><label class="toggle"><input type="checkbox" id="pm-highlight"><span
+                                class="toggle-slider"></span></label> Highlight Badge</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('project-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveProject()">💾 Save Project</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Modal -->
+    <div class="modal-overlay" id="blog-modal" style="align-items:flex-start;padding-top:2rem;">
+        <div class="modal" style="max-width:900px;">
+            <div class="modal-header">
+                <div class="modal-title" id="blog-modal-title">New Blog Post</div>
+                <button class="modal-close" onclick="closeModal('blog-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="bm-id">
+                <div class="form-row">
+                    <div class="field"><label>Title *</label><input type="text" id="bm-title" oninput="autoSlug()">
+                    </div>
+                    <div class="field"><label>Slug *</label><input type="text" id="bm-slug"
+                            placeholder="auto-generated-from-title"></div>
+                </div>
+                <div class="form-row triple">
+                    <div class="field"><label>Category</label><input type="text" id="bm-category"
+                            placeholder="QA, Career, Web Dev..."></div>
+                    <div class="field"><label>Status</label><select id="bm-status">
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select></div>
+                    <div class="field"><label>Image URL</label><input type="text" id="bm-image"
+                            placeholder="/uploads/..."></div>
+                </div>
+                <div class="field"><label>Excerpt / Summary</label><textarea id="bm-excerpt" rows="2"></textarea></div>
+                <div class="field">
+                    <label>Content</label>
+                    <div id="quill-editor"></div>
+                </div>
+                <div class="form-section-title mt-2">SEO</div>
+                <div class="form-row">
+                    <div class="field"><label>Meta Title</label><input type="text" id="bm-meta-title"></div>
+                    <div class="field"><label>Meta Description</label><input type="text" id="bm-meta-desc"></div>
+                </div>
+                <div class="flex gap-2 mt-1">
+                    <label class="toggle-field"><label class="toggle"><input type="checkbox" id="bm-featured"><span
+                                class="toggle-slider"></span></label> Featured</label>
+                    <label class="toggle-field"><label class="toggle"><input type="checkbox" id="bm-top"><span
+                                class="toggle-slider"></span></label> Top Reading</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('blog-modal')">Cancel</button>
+                <button class="btn btn-ghost" onclick="saveBlog('draft')">Save Draft</button>
+                <button class="btn btn-primary" onclick="saveBlog('published')">🚀 Publish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience Modal -->
+    <div class="modal-overlay" id="exp-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="exp-modal-title">Add Experience</div>
+                <button class="modal-close" onclick="closeModal('exp-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="em-id">
+                <div class="form-row">
+                    <div class="field"><label>Role / Title *</label><input type="text" id="em-role"></div>
+                    <div class="field"><label>Company *</label><input type="text" id="em-company"></div>
+                </div>
+                <div class="form-row">
+                    <div class="field"><label>Duration</label><input type="text" id="em-duration"
+                            placeholder="2022 – Present"></div>
+                    <div class="field"><label class="toggle-field" style="margin-top:1.5rem"><label
+                                class="toggle"><input type="checkbox" id="em-current"><span
+                                    class="toggle-slider"></span></label> Current Role</label></div>
+                </div>
+                <div class="field"><label>Responsibilities (one per line)</label><textarea id="em-responsibilities"
+                        rows="5"></textarea></div>
+                <div class="field"><label>Skills / Tags (comma-separated)</label><input type="text" id="em-skills">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('exp-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveExperience()">💾 Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Education/Cert Modal -->
+    <div class="modal-overlay" id="edu-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="edu-modal-title">Add</div>
+                <button class="modal-close" onclick="closeModal('edu-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edm-id">
+                <input type="hidden" id="edm-type">
+                <div class="form-row">
+                    <div class="field"><label>Icon (emoji)</label><input type="text" id="edm-icon" placeholder="🎓">
+                    </div>
+                    <div class="field" id="edm-degree-field"><label>Degree / Title</label><input type="text"
+                            id="edm-degree"></div>
+                    <div class="field" id="edm-name-field" style="display:none"><label>Certification Name</label><input
+                            type="text" id="edm-name"></div>
+                </div>
+                <div class="form-row">
+                    <div class="field"><label>Institution / Issuer</label><input type="text" id="edm-school"></div>
+                    <div class="field" id="edm-date-field"><label>Date / Year</label><input type="text" id="edm-date">
+                    </div>
+                </div>
+                <div class="field" id="edm-detail-field"><label>Detail / Major</label><input type="text"
+                        id="edm-detail"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('edu-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEdu()">💾 Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Modal -->
+    <div class="modal-overlay" id="nav-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="nav-modal-title">Navigation Link</div>
+                <button class="modal-close" onclick="closeModal('nav-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="nm-id">
+                <div class="form-row">
+                    <div class="field"><label>Link Label *</label><input type="text" id="nm-label"
+                            placeholder="Home, Projects..."></div>
+                    <div class="field"><label>URL / Hash *</label><input type="text" id="nm-url"
+                            placeholder="/#projects"></div>
+                </div>
+                <div class="form-row">
+                    <div class="field"><label>Location</label>
+                        <select id="nm-location">
+                            <option value="header">Header Menu</option>
+                            <option value="footer">Footer Menu</option>
+                        </select>
+                    </div>
+                    <div class="field"><label>Sort Order</label><input type="number" id="nm-order" value="0"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('nav-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveNav()">💾 Save Link</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonial Modal -->
+    <div class="modal-overlay" id="testimonial-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="test-modal-title">User Testimonial</div>
+                <button class="modal-close" onclick="closeModal('testimonial-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="tm-id">
+                <div class="form-row">
+                    <div class="field"><label>Client Name *</label><input type="text" id="tm-name"></div>
+                    <div class="field"><label>Avatar URL</label><input type="text" id="tm-avatar"></div>
+                </div>
+                <div class="form-row">
+                    <div class="field"><label>Role</label><input type="text" id="tm-role"></div>
+                    <div class="field"><label>Company</label><input type="text" id="tm-company"></div>
+                </div>
+                <div class="field"><label>Testimonial Content *</label><textarea id="tm-content" rows="4"></textarea>
+                </div>
+                <div class="field"><label>Sort Order</label><input type="number" id="tm-order" value="0"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('testimonial-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveTestimonial()">💾 Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Viewer Modal -->
+    <div class="modal-overlay" id="contact-modal">
+        <div class="modal" style="max-width:540px;">
+            <div class="modal-header">
+                <div class="modal-title">Message Detail</div>
+                <button class="modal-close" onclick="closeModal('contact-modal')">✕</button>
+            </div>
+            <div class="modal-body" id="contact-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Quill.js & Chart.js -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>
