@@ -326,10 +326,22 @@
             color: var(--muted);
             font-size: 0.8rem;
         }
-    </style>
+    
+    .hero__content * {
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9), 0 2px 5px rgba(0, 0, 0, 0.9);
+      color: #ffffff;
+    }
+    .hero__summary strong {
+      color: var(--color-accent-bright);
+    }
+    .text-accent {
+      color: var(--color-accent-bright) !important;
+    }
+  </style>
 </head>
 
 <body>
+  <canvas id="scroll-sequence" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1; pointer-events: none;"></canvas>
 
     <nav>
         <a href="/" class="nav-logo">Md Abir Hassan</a>
@@ -374,7 +386,7 @@
     </footer>
 
     <script>
-        const API = 'http://localhost:3000/api';
+        const API = window.location.hostname === 'localhost' && window.location.port === '5173' ? 'http://localhost:3000/api' : '/api';
         let currentPage = 1;
         let currentCategory = 'all';
         let currentSearch = '';
@@ -478,6 +490,7 @@
         loadCategories();
         loadBlogs();
     </script>
+<script type="module" src="/src/js/sequence.js"></script>
 </body>
 
 </html>

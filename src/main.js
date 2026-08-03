@@ -17,9 +17,7 @@ import {
   initTypingEffect, initScrollSpy
 } from './js/animations.js';
 import { initCursor } from './js/cursor.js';
-import { initThreeBackground } from './js/three-bg.js';
-import { initPenguin } from './js/penguin.js';
-import { initScrollRobot } from './js/scroll-robot.js';
+import { initScrollSequence } from './js/sequence.js';
 
 // Init interactions
 import {
@@ -90,29 +88,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     initScrollSpy();
   });
 
-  // Init Three.js background
-  const canvas = document.getElementById('bg-canvas');
-  if (canvas) {
-    try {
-      initThreeBackground(canvas);
-    } catch (e) {
-      console.warn('Three.js background disabled:', e.message);
-    }
-  }
-
-  // Init penguin mascot
+  // Init Apple-style sequence
   try {
-    initPenguin();
-    console.log('Penguin initialized');
+    initScrollSequence();
+    console.log('Scroll sequence initialized');
   } catch (e) {
-    console.error('Penguin init failed:', e);
-  }
-
-  // Init scroll robot
-  try {
-    initScrollRobot();
-    console.log('Scroll robot initialized');
-  } catch (e) {
-    console.error('Scroll robot init failed:', e);
+    console.error('Scroll sequence init failed:', e);
   }
 });

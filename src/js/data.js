@@ -4,7 +4,7 @@
 // Falls back to hardcoded data if server unreachable
 // ========================================
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = window.location.hostname === 'localhost' && window.location.port === '5173' ? 'http://localhost:3000/api' : '/api';
 
 async function fetchAPI(path) {
     try {

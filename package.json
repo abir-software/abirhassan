@@ -11,6 +11,7 @@
     "server:dev": "node --watch server/index.js"
   },
   "devDependencies": {
+    "canvas": "^3.2.3",
     "vite": "^5.4.21"
   },
   "dependencies": {

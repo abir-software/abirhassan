@@ -138,7 +138,8 @@ export function initContactForm() {
         btn.disabled = true;
 
         try {
-            const res = await fetch('http://localhost:3000/api/contact', {
+            const API_BASE = window.location.hostname === 'localhost' && window.location.port === '5173' ? 'http://localhost:3000/api' : '/api';
+            const res = await fetch(`${API_BASE}/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)

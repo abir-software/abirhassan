@@ -9,7 +9,7 @@
   --color-bg-primary: #0a1628;
   --color-bg-secondary: #0f2040;
   --color-bg-tertiary: #142a50;
-  --color-bg-card: rgba(15, 32, 64, 0.55);
+  --color-bg-card: transparent;
 
   /* Accent Colors */
   --color-accent: #60a5fa;
@@ -27,7 +27,7 @@
   --color-text-accent: var(--color-accent);
 
   /* Glass */
-  --glass-bg: rgba(15, 32, 64, 0.45);
+  --glass-bg: transparent;
   --glass-border: rgba(96, 165, 250, 0.12);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   --glass-blur: 16px;
@@ -102,13 +102,14 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  background: transparent;
 }
 
 body {
   font-family: var(--font-body);
   font-size: var(--fs-base);
   color: var(--color-text-primary);
-  background: var(--color-bg-deep);
+  background: transparent;
   line-height: 1.7;
   overflow-x: hidden;
   cursor: none;
@@ -169,8 +170,8 @@ em { color: var(--color-gold); font-style: normal; }
   padding: 0 var(--space-xl);
 }
 
-/* === Three.js Canvas === */
-#bg-canvas {
+/* === Scroll Sequence Canvas === */
+.scroll-sequence {
   position: fixed;
   top: 0;
   left: 0;
@@ -178,6 +179,7 @@ em { color: var(--color-gold); font-style: normal; }
   height: 100%;
   z-index: var(--z-bg);
   pointer-events: none;
+  object-fit: cover;
 }
 
 /* === Low Motion === */
