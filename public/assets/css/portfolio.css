@@ -983,3 +983,232 @@ footer.transparent-footer {
   }
 }
 
+/* ==========================================================================
+   ULTRA-MODERN MOBILE GLASS DRAWER & HAMBURGER TOGGLE STYLING
+   ========================================================================== */
+
+.mobile-toggle-btn {
+  display: none;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.mobile-toggle-btn:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+}
+
+.mobile-toggle-btn .bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.mobile-strip-bar {
+  display: none;
+}
+
+/* Fullscreen Glass Overlay Drawer */
+.mobile-glass-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3000;
+  background: rgba(10, 12, 22, 0.95);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 24px;
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.96);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-glass-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.overlay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.overlay-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.overlay-close-btn:hover {
+  background: rgba(245, 0, 87, 0.2);
+  border-color: #f50057;
+  color: #f50057;
+}
+
+.overlay-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 30px 0;
+  overflow-y: auto;
+  max-height: 65vh;
+  padding-right: 4px;
+}
+
+.overlay-nav-grid a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.overlay-nav-grid a .nav-icon {
+  font-size: 18px;
+}
+
+.overlay-nav-grid a:hover,
+.overlay-nav-grid a.active {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: rgba(0, 229, 255, 0.35);
+  color: var(--accent);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+}
+
+.overlay-footer {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+.social-pills {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.social-pills a {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.social-pills a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 960px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-toggle-btn {
+    display: flex !important;
+  }
+
+  .mobile-strip-bar {
+    display: block !important;
+    position: fixed;
+    top: 62px;
+    left: 0;
+    width: 100vw;
+    z-index: 999;
+    padding: 6px 12px;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+
+  .mobile-nav-scroll {
+    pointer-events: auto;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 6px 12px;
+    background: rgba(10, 12, 22, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-nav-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-nav-scroll a {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .mobile-nav-scroll a.active {
+    color: var(--accent);
+    background: rgba(0, 229, 255, 0.12);
+    border-color: rgba(0, 229, 255, 0.3);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.15);
+  }
+}
+
