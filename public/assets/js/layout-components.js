@@ -102,9 +102,12 @@
                 </div>
 
                 <div class="overlay-footer">
-                    <div class="social-pills">
+                    <div class="social-pills" style="flex-wrap: wrap;">
                         <a href="https://linkedin.com/in/abirhassan" target="_blank" rel="noopener">LinkedIn ↗</a>
                         <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub ↗</a>
+                        <a href="https://wa.me/8801700000000" target="_blank" rel="noopener">WhatsApp ↗</a>
+                        <a href="https://facebook.com/abirhassan" target="_blank" rel="noopener">Facebook ↗</a>
+                        <a href="https://x.com/abirhassan" target="_blank" rel="noopener">X ↗</a>
                     </div>
                 </div>
             </div>
@@ -138,7 +141,7 @@
                 </div>
 
                 <div class="footer-col links-col">
-                    <div class="footer-heading">QUICK LINKS</div>
+                    <div class="footer-heading">QUICK LINKS & SOCIALS</div>
                     <div class="footer-links-grid">
                         <a href="index.html">Home</a>
                         <a href="about.html">About</a>
@@ -147,9 +150,12 @@
                         <a href="blog.html">Blog</a>
                         <a href="contact.html">Contact</a>
                     </div>
-                    <div class="footer-socials">
+                    <div class="footer-socials" style="flex-wrap: wrap; gap: 8px;">
                         <a href="https://linkedin.com/in/abirhassan" target="_blank" rel="noopener">LinkedIn ↗</a>
                         <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub ↗</a>
+                        <a href="https://wa.me/8801700000000" target="_blank" rel="noopener">WhatsApp ↗</a>
+                        <a href="https://facebook.com/abirhassan" target="_blank" rel="noopener">Facebook ↗</a>
+                        <a href="https://x.com/abirhassan" target="_blank" rel="noopener">X ↗</a>
                     </div>
                 </div>
             `;
