@@ -9,7 +9,7 @@ console.log('🌱 Seeding database...');
 // ─── Admin User ──────────────────────────────────────────
 const existingUser = db.prepare('SELECT id FROM users WHERE username = ?').get('abirhassan2');
 if (!existingUser) {
-    const hash = bcrypt.hashSync('Abir', 10);
+    const hash = bcrypt.hashSync('8146', 10);
     db.prepare('INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)').run('abirhassan2', hash, 'admin');
     console.log('✅ Admin user created: abirhassan2');
 }
