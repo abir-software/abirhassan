@@ -172,18 +172,36 @@ window.addEventListener('DOMContentLoaded', () => {
 // NAVIGATION
 // ─────────────────────────────────────────────────────────
 const PANEL_TITLES = {
-    dashboard: 'Dashboard', hero: 'Hero Section', projects: 'Projects',
-    blog: 'Blog Posts', experience: 'Experience', skills: 'Skills',
-    education: 'Education & Certifications', media: 'Media Library',
-    contact: 'Contact Submissions', settings: 'Settings', activity: 'Activity Log',
-    navigation: 'Site Navigation', testimonials: 'Testimonials', backup: 'Backup & Restore',
+    dashboard: 'Dashboard Overview',
+    hero: 'Home Page Manager',
+    about: 'About Page Manager',
+    experience: 'Experience Page Manager',
+    qatesting: 'QA & Testing Page Manager',
+    pmdetails: 'PM & Operations Page Manager',
+    webdev: 'Web Dev Page Manager',
+    projects: 'Projects Page Manager',
+    blog: 'Blog Posts Manager',
+    skills: 'Skills Master Manager',
+    education: 'Education & Certifications',
+    media: 'Media Library Manager',
+    contact: 'Contact Messages',
+    settings: 'Global Settings',
+    activity: 'System Activity Log',
+    navigation: 'Header & Footer Navigation',
+    testimonials: 'Testimonials Manager',
+    backup: 'Backup & Restore',
 };
+
 const PANEL_LOADERS = {
     dashboard: loadDashboard,
     hero: loadHero,
+    about: loadAboutPage,
+    experience: loadExperience,
+    qatesting: loadQAPage,
+    pmdetails: loadPMPage,
+    webdev: loadWebDevPage,
     projects: loadProjects,
     blog: loadBlogs,
-    experience: loadExperience,
     skills: loadSkills,
     education: loadEducation,
     media: loadMedia,
@@ -192,7 +210,7 @@ const PANEL_LOADERS = {
     activity: loadActivity,
     navigation: loadNavigation,
     testimonials: loadTestimonials,
-    backup: () => { }, // No specific loader needed for static backup panel
+    backup: () => { },
 };
 
 function showPanel(name) {
@@ -1091,6 +1109,125 @@ async function importData(file) {
     } catch (e) { toast('Import failed: ' + e.message, 'error'); }
 }
 
+// ─────────────────────────────────────────────────────────
+// PAGE CONTENT MANAGERS
+// ─────────────────────────────────────────────────────────
+async function loadAboutPage() {
+    try {
+        const heroData = await req('GET', '/hero');
+        if (heroData && heroData.summary) {
+            const el = document.getElementById('about-summary-input');
+            if (el) el.value = heroData.summary;
+        }
+    } catch (e) { console.error(e); }
+}
+
+async function loadQAPage() {
+    try {
+        const skillsData = await req('GET', '/skills');
+        renderQAPageCompetencies(skillsData.qaExpertise || []);
+        renderQATools(skillsData.qaTools || []);
+    } catch (e) { toast('Error loading QA Page data', 'error'); }
+}
+
+function renderQAPageCompetencies(items) {
+    window.qaExpertiseItems = items;
+    const container = document.getElementById('qa-page-competencies-list');
+    if (!container) return;
+    container.innerHTML = items.map((item, i) => `
+        <div class="card mb-2" style="border:1px solid var(--border);padding:1rem;">
+            <div class="form-row">
+                <div class="field" style="flex:1"><label>Icon Emoji</label><input type="text" value="${item.icon || '🧪'}" onchange="window.qaExpertiseItems[${i}].icon=this.value"></div>
+                <div class="field" style="flex:3"><label>Card Title</label><input type="text" value="${item.title || ''}" onchange="window.qaExpertiseItems[${i}].title=this.value"></div>
+                <button class="btn btn-ghost btn-sm text-danger" style="margin-top:1.8rem;" onclick="window.qaExpertiseItems.splice(${i},1);renderQAPageCompetencies(window.qaExpertiseItems)">🗑</button>
+            </div>
+            <div class="field"><label>Competency Bullet Items (Comma-separated)</label>
+                <input type="text" value="${Array.isArray(item.items) ? item.items.join(', ') : (item.items || '')}" onchange="window.qaExpertiseItems[${i}].items=this.value.split(',').map(s=>s.trim()).filter(Boolean)">
+            </div>
+        </div>
+    `).join('') || '<p class="text-muted text-sm p-2">No QA competencies configured</p>';
+}
+
+function addQACompetency() {
+    renderQAPageCompetencies([...(window.qaExpertiseItems || []), { icon: '🧪', title: 'New QA Competency', items: ['Testing Item 1', 'Testing Item 2'] }]);
+}
+
+async function saveQAPageCompetencies() {
+    try {
+        await req('PUT', '/skills/qa-expertise', { items: window.qaExpertiseItems });
+        toast('QA Competencies saved!');
+    } catch (e) { toast('Error saving QA competencies: ' + e.message, 'error'); }
+}
+
+async function loadPMPage() {
+    try {
+        const skillsData = await req('GET', '/skills');
+        renderPMPageResponsibilities(skillsData.pmResponsibilities || []);
+        renderPMPageDocs(skillsData.pmDocs || []);
+    } catch (e) { toast('Error loading PM Page data', 'error'); }
+}
+
+function renderPMPageResponsibilities(items) {
+    window.pmRespItems = items;
+    const container = document.getElementById('pm-page-resp-list');
+    if (!container) return;
+    container.innerHTML = items.map((item, i) => `
+        <div class="card mb-2" style="border:1px solid var(--border);padding:1rem;">
+            <div class="form-row">
+                <div class="field" style="flex:1"><label>Icon Emoji</label><input type="text" value="${item.icon || '📊'}" onchange="window.pmRespItems[${i}].icon=this.value"></div>
+                <div class="field" style="flex:3"><label>Responsibility Title</label><input type="text" value="${item.title || ''}" onchange="window.pmRespItems[${i}].title=this.value"></div>
+                <button class="btn btn-ghost btn-sm text-danger" style="margin-top:1.8rem;" onclick="window.pmRespItems.splice(${i},1);renderPMPageResponsibilities(window.pmRespItems)">🗑</button>
+            </div>
+            <div class="field"><label>Description</label>
+                <textarea rows="2" onchange="window.pmRespItems[${i}].desc=this.value">${item.desc || ''}</textarea>
+            </div>
+        </div>
+    `).join('') || '<p class="text-muted text-sm p-2">No PM responsibilities configured</p>';
+}
+
+function addPMResponsibility() {
+    renderPMPageResponsibilities([...(window.pmRespItems || []), { icon: '📊', title: 'Agile & Project Facilitation', desc: 'Managing project workflows and stakeholder communication.' }]);
+}
+
+async function savePMPageResponsibilities() {
+    try {
+        await req('PUT', '/skills/pm-responsibilities', { items: window.pmRespItems });
+        toast('PM Responsibilities saved!');
+    } catch (e) { toast('Error saving PM responsibilities: ' + e.message, 'error'); }
+}
+
+function renderPMPageDocs(items) {
+    window.pmDocItems = items;
+    const container = document.getElementById('pm-page-docs-list');
+    if (!container) return;
+    container.innerHTML = items.map((item, i) => `
+        <div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem">
+            <input type="text" style="width:60px;" value="${item.icon || '📄'}" onchange="window.pmDocItems[${i}].icon=this.value">
+            <input type="text" style="flex:1;" value="${item.name || item}" onchange="window.pmDocItems[${i}]={icon:window.pmDocItems[${i}].icon||'📄', name:this.value}">
+            <button class="btn btn-ghost btn-sm text-danger" onclick="window.pmDocItems.splice(${i},1);renderPMPageDocs(window.pmDocItems)">🗑</button>
+        </div>
+    `).join('') || '<p class="text-muted text-sm p-2">No PM artifacts configured</p>';
+}
+
+function addPMDoc() {
+    renderPMPageDocs([...(window.pmDocItems || []), { icon: '📄', name: 'Software Requirements Specification (SRS)' }]);
+}
+
+async function savePMPageDocs() {
+    try {
+        await req('PUT', '/skills/pm-docs', { items: window.pmDocItems });
+        toast('PM Artifacts saved!');
+    } catch (e) { toast('Error saving PM artifacts: ' + e.message, 'error'); }
+}
+
+async function loadWebDevPage() {
+    try {
+        const skillsData = await req('GET', '/skills');
+        renderWebSkills(skillsData.webSkills || []);
+        renderWorkflow(skillsData.workflowSteps || []);
+    } catch (e) { toast('Error loading Web Dev Page data', 'error'); }
+}
+
 // Global window function bindings
 window.openExpModal = openExpModal;
 window.editExp = editExp;
@@ -1101,3 +1238,9 @@ window.importData = importData;
 window.openTestimonialModal = openTestimonialModal;
 window.saveTestimonial = saveTestimonial;
 window.deleteTestimonial = deleteTestimonial;
+window.addQACompetency = addQACompetency;
+window.saveQAPageCompetencies = saveQAPageCompetencies;
+window.addPMResponsibility = addPMResponsibility;
+window.savePMPageResponsibilities = savePMPageResponsibilities;
+window.addPMDoc = addPMDoc;
+window.savePMPageDocs = savePMPageDocs;

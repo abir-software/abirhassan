@@ -48,29 +48,30 @@
                 <div class="sidebar-title">Portfolio CMS<small>Content Manager</small></div>
             </div>
             <nav class="sidebar-nav">
-                <div class="nav-section-label">Overview</div>
-                <div class="nav-item active" data-panel="dashboard"><span class="nav-icon">📊</span>Dashboard</div>
+                <div class="nav-section-label">Dashboard</div>
+                <div class="nav-item active" data-panel="dashboard"><span class="nav-icon">📊</span>Dashboard Overview</div>
 
-                <div class="nav-section-label">Content</div>
-                <div class="nav-item" data-panel="hero"><span class="nav-icon">🏠</span>Hero Section</div>
-                <div class="nav-item" data-panel="projects"><span class="nav-icon">🚀</span>Projects</div>
+                <div class="nav-section-label">Pages Management</div>
+                <div class="nav-item" data-panel="hero"><span class="nav-icon">🏠</span>Home Page</div>
+                <div class="nav-item" data-panel="about"><span class="nav-icon">👤</span>About Page</div>
+                <div class="nav-item" data-panel="experience"><span class="nav-icon">💼</span>Experience Page</div>
+                <div class="nav-item" data-panel="qatesting"><span class="nav-icon">🧪</span>QA & Testing Page</div>
+                <div class="nav-item" data-panel="pmdetails"><span class="nav-icon">📊</span>PM & Operations Page</div>
+                <div class="nav-item" data-panel="webdev"><span class="nav-icon">🌐</span>Web Dev Page</div>
+                <div class="nav-item" data-panel="projects"><span class="nav-icon">🚀</span>Projects Page</div>
                 <div class="nav-item" data-panel="blog"><span class="nav-icon">📝</span>Blog Posts</div>
-                <div class="nav-item" data-panel="experience"><span class="nav-icon">💼</span>Experience</div>
-                <div class="nav-item" data-panel="skills"><span class="nav-icon">🧪</span>Skills</div>
-                <div class="nav-item" data-panel="education"><span class="nav-icon">🎓</span>Education</div>
 
-                <div class="nav-section-label">Media</div>
+                <div class="nav-section-label">Media & Communications</div>
                 <div class="nav-item" data-panel="media"><span class="nav-icon">🖼️</span>Media Library</div>
+                <div class="nav-item" data-panel="contact"><span class="nav-icon">📩</span>Contact Messages <span class="nav-badge" id="unread-badge" style="display:none">0</span></div>
 
-                <div class="nav-section-label">Communication</div>
-                <div class="nav-item" data-panel="contact"><span class="nav-icon">📩</span>Contact <span
-                        class="nav-badge" id="unread-badge" style="display:none">0</span></div>
-
-                <div class="nav-section-label">System</div>
-                <div class="nav-item" data-panel="navigation"><span class="nav-icon">🗺️</span>Site Nav</div>
+                <div class="nav-section-label">System & Structure</div>
+                <div class="nav-item" data-panel="navigation"><span class="nav-icon">🗺️</span>Header / Footer Nav</div>
+                <div class="nav-item" data-panel="skills"><span class="nav-icon">🧪</span>Skills Master</div>
+                <div class="nav-item" data-panel="education"><span class="nav-icon">🎓</span>Education & Certs</div>
                 <div class="nav-item" data-panel="testimonials"><span class="nav-icon">💬</span>Testimonials</div>
-                <div class="nav-item" data-panel="settings"><span class="nav-icon">⚙️</span>Settings</div>
-                <div class="nav-item" data-panel="backup"><span class="nav-icon">💾</span>Backup/Restore</div>
+                <div class="nav-item" data-panel="settings"><span class="nav-icon">⚙️</span>Global Settings</div>
+                <div class="nav-item" data-panel="backup"><span class="nav-icon">💾</span>Backup & Restore</div>
                 <div class="nav-item" data-panel="activity"><span class="nav-icon">📋</span>Activity Log</div>
             </nav>
             <div class="sidebar-footer">
@@ -215,20 +216,96 @@
                             </table>
                         </div>
                     </div>
-                </div>
-
-                <!-- ─────────── EXPERIENCE ─────────── -->
+                <!-- ─────────── EXPERIENCE PAGE MANAGER ─────────── -->
                 <div class="panel" id="panel-experience">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Experience</div>
-                            <button class="btn btn-primary" onclick="openExpModal()">+ Add Role</button>
+                            <div class="card-title">💼 Experience Page — Career Timeline & Roles</div>
+                            <button class="btn btn-primary" onclick="openExpModal()">+ Add Experience Role</button>
                         </div>
                         <div id="experience-list"></div>
                     </div>
                 </div>
 
-                <!-- ─────────── SKILLS ─────────── -->
+                <!-- ─────────── ABOUT PAGE MANAGER ─────────── -->
+                <div class="panel" id="panel-about">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">👤 About Page — Executive Summary & Bio</div>
+                            <button class="btn btn-primary" onclick="saveHero()">💾 Save Bio</button>
+                        </div>
+                        <div class="field">
+                            <label>Who I Am / Executive Bio</label>
+                            <textarea id="about-summary-input" rows="6" placeholder="A results-oriented Software Engineer (QA & Operations) with 4+ years of experience..."></textarea>
+                            <div class="hint">Updates the Who I Am bio on both the About Page and Home Page bio summary.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─────────── QA & TESTING PAGE MANAGER ─────────── -->
+                <div class="panel" id="panel-qatesting">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">🧪 QA & Testing — Core QA Competencies</div>
+                            <button class="btn btn-primary" onclick="saveQAPageCompetencies()">💾 Save QA Competencies</button>
+                        </div>
+                        <div id="qa-page-competencies-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addQACompetency()">+ Add QA Competency</button>
+                    </div>
+
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <div class="card-title">🧰 QA Tool Stack & Frameworks</div>
+                            <button class="btn btn-primary" onclick="saveQATools()">💾 Save QA Tools</button>
+                        </div>
+                        <div id="qa-page-tools-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addQATool()">+ Add QA Tool</button>
+                    </div>
+                </div>
+
+                <!-- ─────────── PM & OPERATIONS PAGE MANAGER ─────────── -->
+                <div class="panel" id="panel-pmdetails">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">📊 Project Management & Operations — Core Responsibilities</div>
+                            <button class="btn btn-primary" onclick="savePMPageResponsibilities()">💾 Save PM Responsibilities</button>
+                        </div>
+                        <div id="pm-page-resp-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addPMResponsibility()">+ Add PM Responsibility</button>
+                    </div>
+
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <div class="card-title">📄 PM Artifacts & Documentation</div>
+                            <button class="btn btn-primary" onclick="savePMPageDocs()">💾 Save PM Artifacts</button>
+                        </div>
+                        <div id="pm-page-docs-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addPMDoc()">+ Add PM Artifact</button>
+                    </div>
+                </div>
+
+                <!-- ─────────── WEB DEV PAGE MANAGER ─────────── -->
+                <div class="panel" id="panel-webdev">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">🌐 Web Development — Core Skills & Technologies</div>
+                            <button class="btn btn-primary" onclick="saveWebSkills()">💾 Save Web Skills</button>
+                        </div>
+                        <div id="web-page-skills-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addWebSkill()">+ Add Tech Skill</button>
+                    </div>
+
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <div class="card-title">⚙️ Frontend Engineering Workflow Steps</div>
+                            <button class="btn btn-primary" onclick="saveWorkflow()">💾 Save Workflow</button>
+                        </div>
+                        <div id="web-page-workflow-list"></div>
+                        <button class="btn btn-ghost btn-sm mt-1" onclick="addWorkflowStep()">+ Add Workflow Step</button>
+                    </div>
+                </div>
+
+                <!-- ─────────── SKILLS MASTER ─────────── -->
                 <div class="panel" id="panel-skills">
                     <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
                         <button class="btn btn-ghost btn-sm"
