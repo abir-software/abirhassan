@@ -1,18 +1,18 @@
 // =========================================================
-// LAYOUT COMPONENTS — Universal Header, Social Links & Footer
+// LAYOUT COMPONENTS — Universal Top Fixed Navbar & Footer
 // =========================================================
 
 (function () {
     const DEFAULT_NAV = [
-        { label: 'HOME', url: 'index.html', location: 'footer_left' },
-        { label: 'ABOUT', url: 'about.html', location: 'footer_left' },
-        { label: 'EXPERIENCE', url: 'experience.html', location: 'footer_left' },
-        { label: 'QA & TESTING', url: 'qa-testing.html', location: 'footer_left' },
-        { label: 'PM DETAILS', url: 'pm-details.html', location: 'footer_left' },
-        { label: 'PROJECTS', url: 'projects.html', location: 'footer_left' },
-        { label: 'WEB DEV', url: 'web-dev.html', location: 'footer_left' },
-        { label: 'BLOG', url: 'blog.html', location: 'footer_left' },
-        { label: 'CONTACT', url: 'contact.html', location: 'footer_right' },
+        { label: 'HOME', url: 'index.html' },
+        { label: 'ABOUT', url: 'about.html' },
+        { label: 'EXPERIENCE', url: 'experience.html' },
+        { label: 'QA & TESTING', url: 'qa-testing.html' },
+        { label: 'PM DETAILS', url: 'pm-details.html' },
+        { label: 'PROJECTS', url: 'projects.html' },
+        { label: 'WEB DEV', url: 'web-dev.html' },
+        { label: 'BLOG', url: 'blog.html' },
+        { label: 'CONTACT', url: 'contact.html' },
     ];
 
     const PAGE_BADGES = {
@@ -53,11 +53,7 @@
 
         const currentPage = getCurrentPage();
         const navItems = await fetchNavFromAPI();
-
         const badgeText = PAGE_BADGES[currentPage] || 'PORTFOLIO';
-
-        const leftLinks = navItems.filter(i => i.location !== 'footer_right');
-        const rightLinks = navItems.filter(i => i.location === 'footer_right');
 
         function isLinkActive(url) {
             if (!url) return false;
@@ -67,20 +63,22 @@
             return false;
         }
 
-        const leftHtml = leftLinks.map(item => {
+        const navLinksHtml = navItems.map(item => {
             const activeClass = isLinkActive(item.url) ? ' class="active"' : '';
             return `<a href="${item.url}"${activeClass}>${escapeHTML(item.label)}</a>`;
-        }).join('\n                ');
-
-        const rightHtml = rightLinks.map(item => {
-            const activeClass = isLinkActive(item.url) ? ' class="active"' : '';
-            return `<a href="${item.url}"${activeClass}>${escapeHTML(item.label)}</a>`;
-        }).join('\n                ');
+        }).join('\n                    ');
 
         container.innerHTML = `
-        <header class="interactive">
-            <a href="index.html" class="logo">A<span class="logo-x">H</span></a>
-            <div class="right-logo">
+        <header class="top-navbar interactive">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">A<span class="logo-x">H</span></a>
+            </div>
+
+            <nav class="top-nav-links">
+                ${navLinksHtml}
+            </nav>
+
+            <div class="nav-right">
                 <div class="yesex-logo">${escapeHTML(badgeText)}</div>
             </div>
         </header>
@@ -92,10 +90,12 @@
 
         <footer class="interactive">
             <div class="footer-left">
-                ${leftHtml}
+                <span>© 2026 Md Abir Hassan. All rights reserved.</span>
             </div>
             <div class="footer-right">
-                ${rightHtml}
+                <a href="https://linkedin.com/in/abirhassan" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub</a>
+                <a href="contact.html">Contact</a>
             </div>
         </footer>
         `;

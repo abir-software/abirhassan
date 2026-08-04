@@ -54,22 +54,33 @@ canvas#animationCanvas {
   pointer-events: auto;
 }
 
-/* ─── Header ─────────────────────────────────────────────── */
-header {
-  position: absolute;
+/* ─── Header & Top Fixed Navbar ───────────────────────────── */
+header.top-navbar {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 35px 5vw;
+  padding: 16px 4vw;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background: rgba(13, 15, 23, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.nav-brand {
+  display: flex;
   align-items: center;
 }
 
 .logo {
   font-family: 'Outfit', sans-serif;
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 900;
   letter-spacing: -2px;
   text-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
@@ -81,26 +92,68 @@ header {
   color: var(--accent);
 }
 
-.right-logo {
-  text-align: right;
+.top-nav-links {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.top-nav-links a {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 4px 0;
+}
+
+.top-nav-links a:hover,
+.top-nav-links a.active {
+  color: #fff;
+  text-shadow: 0 0 10px var(--accent);
+}
+
+.top-nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  border-radius: 2px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
 }
 
 .yesex-logo {
   font-family: 'Outfit', sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(0, 229, 255, 0.1);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.15);
 }
 
 /* ─── Social Links & Footer ──────────────────────────────── */
 .social-links {
-  position: absolute;
+  position: fixed;
   left: -80px;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%) rotate(-90deg);
   display: flex;
   gap: 30px;
@@ -108,6 +161,7 @@ header {
   font-size: 12px;
   letter-spacing: 3px;
   font-weight: 700;
+  z-index: 999;
 }
 
 .social-links a {
@@ -122,25 +176,28 @@ header {
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  padding: 35px 5vw;
+  padding: 40px 5vw;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-family: 'Outfit', sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 2px;
+  background: rgba(13, 15, 23, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 60px;
 }
 
 .footer-left,
 .footer-right {
   display: flex;
-  gap: 30px;
+  gap: 25px;
   flex-wrap: wrap;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 footer a {
