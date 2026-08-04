@@ -9,15 +9,23 @@ const router = Router();
 
 function parseExp(e) {
     if (!e) return null;
-    e.responsibilities = JSON.parse(e.responsibilities || '[]');
-    e.skills = JSON.parse(e.skills || '[]');
+    try {
+        e.responsibilities = typeof e.responsibilities === 'string' ? JSON.parse(e.responsibilities || '[]') : (e.responsibilities || []);
+    } catch (err) {
+        e.responsibilities = e.responsibilities ? [e.responsibilities] : [];
+    }
+    try {
+        e.skills = typeof e.skills === 'string' ? JSON.parse(e.skills || '[]') : (e.skills || []);
+    } catch (err) {
+        e.skills = e.skills ? [e.skills] : [];
+    }
     e.is_current = !!e.is_current;
     return e;
 }
 
 // GET /api/experience (public)
 router.get('/', (req, res) => {
-    const rows = db.prepare('SELECT * FROM experience ORDER BY sort_order ASC').all().map(parseExp);
+    const rows = db.prepare('SELECT * FROM experience ORDER BY sort_order ASC, id ASC').all().map(parseExp);
     res.json(rows);
 });
 
@@ -30,26 +38,38 @@ router.get('/:id', (req, res) => {
 
 // POST /api/experience (protected)
 router.post('/', verifyToken, (req, res) => {
-    const { role, company, duration, responsibilities, skills, is_current, sort_order } = req.body;
-    const result = db.prepare(`INSERT INTO experience (role, company, duration, responsibilities, skills, is_current, sort_order) VALUES (?,?,?,?,?,?,?)`)
-        .run(role, company, duration, JSON.stringify(responsibilities || []), JSON.stringify(skills || []), is_current ? 1 : 0, sort_order || 0);
-    db.prepare(`INSERT INTO activity_log (action, details) VALUES (?,?)`).run('create', `Experience added: ${role} at ${company}`);
+    const { role, company, location, duration, badge, logo, description, responsibilities, skills, is_current, sort_order } = req.body;
+    const respJSON = JSON.stringify(Array.isArray(responsibilities) ? responsibilities : (responsibilities ? String(responsibilities).split('\n').filter(Boolean) : []));
+    const skillsJSON = JSON.stringify(Array.isArray(skills) ? skills : (skills ? String(skills).split(',').map(s => s.trim()).filter(Boolean) : []));
+
+    const result = db.prepare(`
+        INSERT INTO experience (role, company, location, duration, badge, logo, description, responsibilities, skills, is_current, sort_order)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?)
+    `).run(role, company, location || '', duration || '', badge || '', logo || '', description || '', respJSON, skillsJSON, is_current ? 1 : 0, sort_order || 0);
+
+    try { db.prepare(`INSERT INTO activity_log (action, details) VALUES (?,?)`).run('create', `Experience added: ${role} at ${company}`); } catch(e){}
     res.json({ id: result.lastInsertRowid, success: true });
 });
 
 // PUT /api/experience/:id (protected)
 router.put('/:id', verifyToken, (req, res) => {
-    const { role, company, duration, responsibilities, skills, is_current, sort_order } = req.body;
-    db.prepare(`UPDATE experience SET role=?,company=?,duration=?,responsibilities=?,skills=?,is_current=?,sort_order=? WHERE id=?`)
-        .run(role, company, duration, JSON.stringify(responsibilities || []), JSON.stringify(skills || []), is_current ? 1 : 0, sort_order || 0, req.params.id);
-    db.prepare(`INSERT INTO activity_log (action, details) VALUES (?,?)`).run('update', `Experience updated: ${role}`);
+    const { role, company, location, duration, badge, logo, description, responsibilities, skills, is_current, sort_order } = req.body;
+    const respJSON = JSON.stringify(Array.isArray(responsibilities) ? responsibilities : (responsibilities ? String(responsibilities).split('\n').filter(Boolean) : []));
+    const skillsJSON = JSON.stringify(Array.isArray(skills) ? skills : (skills ? String(skills).split(',').map(s => s.trim()).filter(Boolean) : []));
+
+    db.prepare(`
+        UPDATE experience SET role=?, company=?, location=?, duration=?, badge=?, logo=?, description=?, responsibilities=?, skills=?, is_current=?, sort_order=?
+        WHERE id=?
+    `).run(role, company, location || '', duration || '', badge || '', logo || '', description || '', respJSON, skillsJSON, is_current ? 1 : 0, sort_order || 0, req.params.id);
+
+    try { db.prepare(`INSERT INTO activity_log (action, details) VALUES (?,?)`).run('update', `Experience updated: ${role}`); } catch(e){}
     res.json({ success: true });
 });
 
 // DELETE /api/experience/:id (protected)
 router.delete('/:id', verifyToken, (req, res) => {
     db.prepare('DELETE FROM experience WHERE id = ?').run(req.params.id);
-    db.prepare(`INSERT INTO activity_log (action, details) VALUES (?,?)`).run('delete', `Experience entry deleted`);
+    try { db.prepare(`INSERT INTO activity_log (action, details) VALUES (?,?)`).run('delete', `Experience entry deleted`); } catch(e){}
     res.json({ success: true });
 });
 

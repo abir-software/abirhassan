@@ -117,7 +117,11 @@ db.exec(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role TEXT,
     company TEXT,
+    location TEXT,
     duration TEXT,
+    badge TEXT,
+    logo TEXT,
+    description TEXT,
     responsibilities TEXT,
     skills TEXT,
     is_current INTEGER DEFAULT 0,
@@ -230,5 +234,11 @@ db.exec(`
     created_at TEXT DEFAULT (datetime('now'))
   );
 `);
+
+// ─── Migrations ──────────────────────────────────────────
+try { db.exec('ALTER TABLE experience ADD COLUMN location TEXT'); } catch (e) {}
+try { db.exec('ALTER TABLE experience ADD COLUMN badge TEXT'); } catch (e) {}
+try { db.exec('ALTER TABLE experience ADD COLUMN logo TEXT'); } catch (e) {}
+try { db.exec('ALTER TABLE experience ADD COLUMN description TEXT'); } catch (e) {}
 
 export default db;

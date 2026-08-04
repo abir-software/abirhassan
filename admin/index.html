@@ -651,6 +651,47 @@
                 <button class="btn btn-primary" onclick="saveEdu()">💾 Save</button>
             </div>
         </div>
+    <!-- Experience Modal -->
+    <div class="modal-overlay" id="exp-modal">
+        <div class="modal" style="max-width:640px;">
+            <div class="modal-header">
+                <div class="modal-title" id="exp-modal-title">Add Experience Role</div>
+                <button class="modal-close" onclick="closeModal('exp-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="em-id">
+                <div class="form-row">
+                    <div class="field"><label>Role / Title *</label><input type="text" id="em-role" placeholder="e.g. Software Engineer" required></div>
+                    <div class="field"><label>Company Name *</label><input type="text" id="em-company" placeholder="e.g. Daffodil Software Ltd. (DSL)" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="field"><label>Duration String</label><input type="text" id="em-duration" placeholder="e.g. Jul 2026 – Present · 2 mos"></div>
+                    <div class="field"><label>Role Badge</label><input type="text" id="em-badge" placeholder="e.g. PRESENT ROLE, QA & TESTING"></div>
+                </div>
+                <div class="form-row">
+                    <div class="field"><label>Company Logo URL</label><input type="text" id="em-logo" placeholder="/assets/images/daffodilgroup.jpg"></div>
+                    <div class="field"><label>Sort Order</label><input type="number" id="em-sort" value="0"></div>
+                </div>
+                <div class="field"><label>Location (Optional)</label><input type="text" id="em-location" placeholder="e.g. 📍 Dhaka, Bangladesh · On-site"></div>
+                <div class="field"><label>Role Overview / Summary (Optional)</label><textarea id="em-description" rows="2" placeholder="Role overview summary..."></textarea></div>
+                <div class="field">
+                    <label>Key Highlights / Bullet Points (One per line)</label>
+                    <textarea id="em-responsibilities" rows="5" placeholder="Lead Quality Engineering: Drive test strategy...&#10;Automation & Performance Testing: Design Cypress test suites..."></textarea>
+                    <div class="hint">Each line renders as a bullet item with high-contrast text styling on the portfolio.</div>
+                </div>
+                <div class="field">
+                    <label>Skill Tags (Comma-separated)</label>
+                    <input type="text" id="em-skills" placeholder="Cypress, JMeter, Jira, REST API Testing, Agile Scrum">
+                </div>
+                <div class="field-checkbox mt-1">
+                    <label><input type="checkbox" id="em-current"> Present Role (Current)</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('exp-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveExperience()">💾 Save Experience</button>
+            </div>
+        </div>
     </div>
 
     <!-- Navigation Modal -->

@@ -463,37 +463,62 @@ async function loadExperience() {
     try {
         const rows = await req('GET', '/experience');
         document.getElementById('experience-list').innerHTML = rows.map(e => `
-      <div class="card mb-2" style="border-left:3px solid ${e.is_current ? 'var(--accent)' : 'var(--border)'}">
+      <div class="card mb-2" style="border-left:4px solid ${e.is_current ? 'var(--accent)' : 'var(--border)'}">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem">
           <div>
-            <div style="font-weight:700;font-size:1rem">${e.role} ${e.is_current ? '<span class="badge badge-success">Current</span>' : ''}</div>
-            <div class="text-muted">${e.company} • ${e.duration}</div>
+            <div style="font-weight:700;font-size:1.1rem;color:var(--text-primary)">
+              ${e.role} 
+              ${e.is_current ? '<span class="badge badge-success">PRESENT ROLE</span>' : ''}
+              ${e.badge ? `<span class="badge badge-info">${e.badge}</span>` : ''}
+            </div>
+            <div class="text-muted" style="margin-top:2px;">🏢 ${e.company} • 📅 ${e.duration || '—'}</div>
+            ${e.location ? `<div class="text-muted text-sm" style="margin-top:2px;">${e.location}</div>` : ''}
           </div>
-          <div style="display:flex;gap:.3rem">
+          <div style="display:flex;gap:.4rem">
             <button class="btn btn-ghost btn-sm" onclick="editExp(${e.id})">✏️ Edit</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteExp(${e.id},'${e.role.replace(/'/g, "\\'")}')">🗑</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteExp(${e.id},'${(e.role || '').replace(/'/g, "\\'")}')">🗑 Delete</button>
           </div>
         </div>
+        ${e.description ? `<p class="text-sm mt-1" style="color:var(--text-secondary)">${e.description}</p>` : ''}
+        ${Array.isArray(e.responsibilities) && e.responsibilities.length ? `
+            <ul style="margin-top:.5rem;padding-left:1.2rem;font-size:0.88rem;color:var(--text-secondary)">
+                ${e.responsibilities.map(r => `<li>${r}</li>`).join('')}
+            </ul>
+        ` : ''}
         <div class="tags-list mt-1">${(e.skills || []).map(s => `<span class="tag">${s}</span>`).join('')}</div>
-      </div>`).join('') || '<p class="text-muted text-sm">No experience entries</p>';
-    } catch (e) { toast('Error loading experience', 'error'); }
+      </div>`).join('') || '<p class="text-muted text-sm p-2">No experience entries found</p>';
+    } catch (e) { toast('Error loading experience: ' + e.message, 'error'); }
 }
 
 function openExpModal(data = null) {
-    document.getElementById('exp-modal-title').textContent = data ? 'Edit Experience' : 'Add Experience';
+    document.getElementById('exp-modal-title').textContent = data ? 'Edit Experience Role' : 'Add Experience Role';
     document.getElementById('em-id').value = data?.id || '';
     document.getElementById('em-role').value = data?.role || '';
     document.getElementById('em-company').value = data?.company || '';
     document.getElementById('em-duration').value = data?.duration || '';
+    document.getElementById('em-badge').value = data?.badge || '';
+    document.getElementById('em-logo').value = data?.logo || '/assets/images/daffodilgroup.jpg';
+    document.getElementById('em-location').value = data?.location || '';
+    document.getElementById('em-description').value = data?.description || '';
     document.getElementById('em-current').checked = !!data?.is_current;
-    document.getElementById('em-responsibilities').value = (data?.responsibilities || []).join('\n');
-    document.getElementById('em-skills').value = (data?.skills || []).join(', ');
+    document.getElementById('em-sort').value = data?.sort_order || 0;
+
+    const resps = Array.isArray(data?.responsibilities) ? data.responsibilities.join('\n') : (data?.responsibilities || '');
+    document.getElementById('em-responsibilities').value = resps;
+
+    const sks = Array.isArray(data?.skills) ? data.skills.join(', ') : (data?.skills || '');
+    document.getElementById('em-skills').value = sks;
+
     openModal('exp-modal');
 }
 
 async function editExp(id) {
-    try { const e = await req('GET', `/experience/${id}`); openExpModal(e); }
-    catch (e) { toast('Error: ' + e.message, 'error'); }
+    try { 
+        const e = await req('GET', `/experience/${id}`); 
+        openExpModal(e); 
+    } catch (e) { 
+        toast('Error: ' + e.message, 'error'); 
+    }
 }
 
 async function saveExperience() {
@@ -502,23 +527,33 @@ async function saveExperience() {
         role: document.getElementById('em-role').value,
         company: document.getElementById('em-company').value,
         duration: document.getElementById('em-duration').value,
-        responsibilities: document.getElementById('em-responsibilities').value.split('\n').filter(Boolean),
+        badge: document.getElementById('em-badge').value,
+        logo: document.getElementById('em-logo').value,
+        location: document.getElementById('em-location').value,
+        description: document.getElementById('em-description').value,
+        responsibilities: document.getElementById('em-responsibilities').value.split('\n').map(s => s.trim()).filter(Boolean),
         skills: document.getElementById('em-skills').value.split(',').map(s => s.trim()).filter(Boolean),
         is_current: document.getElementById('em-current').checked,
+        sort_order: parseInt(document.getElementById('em-sort').value) || 0,
     };
     try {
         if (id) await req('PUT', `/experience/${id}`, body);
         else await req('POST', '/experience', body);
-        toast('Experience saved!');
+        toast(id ? 'Experience role updated!' : 'Experience role added!');
         closeModal('exp-modal');
         loadExperience();
     } catch (e) { toast('Error: ' + e.message, 'error'); }
 }
 
 async function deleteExp(id, role) {
-    if (!confirm(`Delete "${role}"?`)) return;
-    try { await req('DELETE', `/experience/${id}`); toast('Deleted'); loadExperience(); }
-    catch (e) { toast('Error: ' + e.message, 'error'); }
+    if (!confirm(`Are you sure you want to delete experience role "${role}"?`)) return;
+    try { 
+        await req('DELETE', `/experience/${id}`); 
+        toast('Experience role deleted'); 
+        loadExperience(); 
+    } catch (e) { 
+        toast('Error: ' + e.message, 'error'); 
+    }
 }
 
 // ─────────────────────────────────────────────────────────
@@ -1055,3 +1090,14 @@ async function importData(file) {
         setTimeout(() => location.reload(), 2000);
     } catch (e) { toast('Import failed: ' + e.message, 'error'); }
 }
+
+// Global window function bindings
+window.openExpModal = openExpModal;
+window.editExp = editExp;
+window.saveExperience = saveExperience;
+window.deleteExp = deleteExp;
+window.exportData = exportData;
+window.importData = importData;
+window.openTestimonialModal = openTestimonialModal;
+window.saveTestimonial = saveTestimonial;
+window.deleteTestimonial = deleteTestimonial;
