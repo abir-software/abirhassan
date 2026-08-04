@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     const { category, status, featured, top_reading, search, page = 1, limit = 10 } = req.query;
     let query = 'SELECT id, title, slug, excerpt, category, image, featured, top_reading, status, read_count, created_at FROM blogs';
     const params = [];
-    const conditions = ['status = "published"'];
+    const conditions = ["status = 'published'"];
 
     if (category) { conditions.push('category = ?'); params.push(category); }
     if (featured === 'true') { conditions.push('featured = 1'); }
