@@ -177,21 +177,47 @@
         }
     }
 
-    // ─── 4. POPULATE FEATURED PROJECTS ──────────────────────
+    // ─── 4. POPULATE FEATURED & CATEGORY PROJECTS ──────────────
     async function loadProjectsData() {
         const data = await fetchAPI('/projects');
         if (!data || !Array.isArray(data) || data.length === 0) return;
 
-        const projGridEl = document.querySelector('.section.projects .grid');
-        if (!projGridEl) return;
+        function renderCardList(items) {
+            return items.map(item => `
+                <div class="card">
+                    <div class="card-title">${escapeHTML(item.title || '')}</div>
+                    <div class="card-subtitle">${escapeHTML(item.category ? item.category.toUpperCase() : (item.org || ''))}</div>
+                    <div class="card-text">${escapeHTML(item.desc || item.description || '')}</div>
+                </div>
+            `).join('');
+        }
 
-        projGridEl.innerHTML = data.slice(0, 6).map(item => `
-            <div class="card">
-                <div class="card-title">${escapeHTML(item.title || '')}</div>
-                <div class="card-subtitle">${escapeHTML(item.category ? item.category.toUpperCase() : (item.org || ''))}</div>
-                <div class="card-text">${escapeHTML(item.desc || item.description || '')}</div>
-            </div>
-        `).join('');
+        // All Projects Grid (Top 5)
+        const allGridEl = document.getElementById('all-projects-grid') || document.querySelector('.section.projects .grid');
+        if (allGridEl) {
+            allGridEl.innerHTML = renderCardList(data.slice(0, 5));
+        }
+
+        // QA Projects Grid
+        const qaGridEl = document.getElementById('qa-projects-grid');
+        if (qaGridEl) {
+            const qaItems = data.filter(p => p.category === 'qa' || (p.tags && p.tags.includes('QA')));
+            if (qaItems.length > 0) qaGridEl.innerHTML = renderCardList(qaItems.slice(0, 4));
+        }
+
+        // PM Projects Grid
+        const pmGridEl = document.getElementById('pm-projects-grid');
+        if (pmGridEl) {
+            const pmItems = data.filter(p => p.category === 'pm' || (p.tags && p.tags.includes('PM')));
+            if (pmItems.length > 0) pmGridEl.innerHTML = renderCardList(pmItems.slice(0, 4));
+        }
+
+        // Web Projects Grid
+        const webGridEl = document.getElementById('web-projects-grid');
+        if (webGridEl) {
+            const webItems = data.filter(p => p.category === 'web' || (p.tags && p.tags.includes('Web')));
+            if (webItems.length > 0) webGridEl.innerHTML = renderCardList(webItems.slice(0, 4));
+        }
     }
 
     // ─── 5. POPULATE SETTINGS (THEME / META) ─────────────────
