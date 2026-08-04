@@ -216,6 +216,7 @@
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+        let moveTimeout;
         window.addEventListener('mousemove', e => {
             mouseX = e.clientX;
             mouseY = e.clientY;
@@ -223,6 +224,12 @@
                 isVisible = true;
                 cursorEl.classList.add('active');
             }
+
+            cursorEl.classList.add('moving');
+            clearTimeout(moveTimeout);
+            moveTimeout = setTimeout(() => {
+                cursorEl.classList.remove('moving');
+            }, 150);
         });
 
         document.addEventListener('mouseleave', () => {
