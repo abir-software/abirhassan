@@ -228,7 +228,7 @@ if (eduCount.c === 0) {
     [
         ['🎓', 'MBA (MIS)', 'Daffodil International University', 'Running', 'Management Information Systems', 0],
         ['💻', 'BSc in CSE', 'Daffodil International University', '2018 – 2021', 'Computer Science & Engineering', 1],
-        ['📚', 'HSC (Science)', 'Higher Secondary', 'CGPA 3.92', 'Science Stream', 2],
+        ['📚', 'HSC (Science)', 'Higher Secondary', 'Science', 'Science Stream', 2],
     ].forEach(r => ins.run(...r));
     console.log('✅ Education seeded');
 }
