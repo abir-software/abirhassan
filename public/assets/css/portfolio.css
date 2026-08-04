@@ -1418,3 +1418,118 @@ footer.transparent-footer {
   text-shadow: 0 1.5px 8px rgba(0, 0, 0, 0.95), 0 0 1px rgba(0, 0, 0, 0.9);
 }
 
+/* ==========================================================================
+   TRANSPARENT FLOATING GLASS FOOTER (Matching Nav Island Style)
+   ========================================================================== */
+
+footer.transparent-footer {
+  margin-top: 80px;
+  padding: 45px 6vw;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 32px 32px 0 0;
+  box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.2fr;
+  gap: 40px;
+  align-items: start;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.footer-logo {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-logo .logo-x {
+  color: var(--accent);
+}
+
+.footer-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.footer-info-item {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 10px;
+}
+
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.footer-links-grid a {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.footer-links-grid a:hover {
+  color: var(--accent);
+}
+
+.footer-socials a {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-socials a:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.25);
+}
+
+@media (max-width: 960px) {
+  footer.transparent-footer {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 35px 24px;
+    border-radius: 24px 24px 0 0;
+  }
+}
+
