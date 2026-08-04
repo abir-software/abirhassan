@@ -87,8 +87,12 @@ app.use((err, req, res, next) => {
 });
 
 // ─── Start ───────────────────────────────────────────────
-app.listen(PORT, () => {
-    console.log(`\n🚀 Portfolio CMS Server running on http://localhost:${PORT}`);
-    console.log(`   Admin Panel: http://localhost:${PORT}/admin`);
-    console.log(`   API Base:    http://localhost:${PORT}/api\n`);
-});
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`\n🚀 Portfolio CMS Server running on http://localhost:${PORT}`);
+        console.log(`   Admin Panel: http://localhost:${PORT}/admin`);
+        console.log(`   API Base:    http://localhost:${PORT}/api\n`);
+    });
+}
+
+export default app;
