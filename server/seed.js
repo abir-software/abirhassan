@@ -252,4 +252,22 @@ if (settingsCount.c === 0) {
     console.log('✅ Settings seeded');
 }
 
+// ─── Navigation ──────────────────────────────────────────
+const navCount = db.prepare('SELECT COUNT(*) as c FROM navigation').get();
+if (navCount.c === 0) {
+    const ins = db.prepare('INSERT INTO navigation (label, url, location, sort_order) VALUES (?,?,?,?)');
+    [
+        ['HOME', 'index.html', 'footer_left', 0],
+        ['ABOUT', 'about.html', 'footer_left', 1],
+        ['EXPERIENCE', 'experience.html', 'footer_left', 2],
+        ['QA & TESTING', 'qa-testing.html', 'footer_left', 3],
+        ['PM DETAILS', 'pm-details.html', 'footer_left', 4],
+        ['PROJECTS', 'projects.html', 'footer_left', 5],
+        ['WEB DEV', 'web-dev.html', 'footer_left', 6],
+        ['BLOG', 'blog.html', 'footer_left', 7],
+        ['CONTACT', 'contact.html', 'footer_right', 8],
+    ].forEach(r => ins.run(...r));
+    console.log('✅ Navigation seeded');
+}
+
 console.log('\n🎉 Database seeded successfully!');
