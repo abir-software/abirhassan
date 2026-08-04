@@ -1823,11 +1823,14 @@ footer.transparent-footer {
    ========================================================================== */
 
 @media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor *,
   body.has-custom-cursor,
   body.has-custom-cursor *,
   body.has-custom-cursor *:hover,
   body.has-custom-cursor *:active,
-  body.has-custom-cursor *:focus {
+  body.has-custom-cursor *:focus,
+  body.has-custom-cursor *:visited {
     cursor: none !important;
   }
 }

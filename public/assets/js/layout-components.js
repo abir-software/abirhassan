@@ -192,7 +192,7 @@
         if (!cursorEl) {
             cursorEl = document.createElement('div');
             cursorEl.id = 'custom-glass-cursor';
-            cursorEl.className = 'custom-glass-cursor active';
+            cursorEl.className = 'custom-glass-cursor';
             cursorEl.innerHTML = `
                 <div class="cursor-glow-ring"></div>
                 <div class="cursor-pointer-wrap">
@@ -220,16 +220,18 @@
                 </div>
             `;
             document.body.appendChild(cursorEl);
+            document.documentElement.classList.add('has-custom-cursor');
             document.body.classList.add('has-custom-cursor');
         }
 
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
+        let mouseX = -100;
+        let mouseY = -100;
         let prevMouseX = mouseX;
         let prevMouseY = mouseY;
         let isHovered = false;
         let isClicked = false;
-        let isVisible = true;
+        let isVisible = false;
+        let hasMoved = false;
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -237,6 +239,7 @@
         window.addEventListener('mousemove', e => {
             mouseX = e.clientX;
             mouseY = e.clientY;
+            hasMoved = true;
             if (!isVisible) {
                 isVisible = true;
                 cursorEl.classList.add('active');
@@ -254,13 +257,24 @@
             cursorEl.classList.remove('active');
         });
 
-        document.addEventListener('mouseenter', () => {
+        document.addEventListener('mouseenter', e => {
+            if (e.clientX && e.clientY) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                hasMoved = true;
+            }
             isVisible = true;
             cursorEl.classList.add('active');
         });
 
-        document.addEventListener('mousedown', () => {
+        document.addEventListener('mousedown', e => {
             isClicked = true;
+            if (e.clientX && e.clientY) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                hasMoved = true;
+                cursorEl.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+            }
             cursorEl.classList.add('clicking');
         });
 
@@ -293,7 +307,7 @@
         let currentRotation = BASE_UPRIGHT_ANGLE;
 
         function animLoop() {
-            if (isVisible) {
+            if (isVisible && hasMoved) {
                 // Outer container locks INSTANTLY to exact mouse position (no tip lag)
                 cursorEl.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
 
