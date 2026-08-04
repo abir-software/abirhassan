@@ -196,10 +196,10 @@
                                 <stop offset="100%" stop-color="rgba(255, 255, 255, 0.05)" />
                             </linearGradient>
                         </defs>
-                        <path class="svg-cursor-shadow" d="M 4 4 L 14 30 L 19 18 L 30 14 Z" />
-                        <path class="svg-cursor-rainbow" d="M 4 4 L 14 30 L 19 18 L 30 14 Z" />
-                        <path class="svg-cursor-glass-body" d="M 5 6 L 13 27 L 17 17 L 27 13 Z" />
-                        <path class="svg-cursor-specular" d="M 5 6 L 12 21 L 15 16 L 22 13 Z" />
+                        <path class="svg-cursor-shadow" d="M 4 4 L 4 27 L 11 20 L 15 29 L 19 27 L 15 18 L 23 18 Z" />
+                        <path class="svg-cursor-rainbow" d="M 4 4 L 4 27 L 11 20 L 15 29 L 19 27 L 15 18 L 23 18 Z" />
+                        <path class="svg-cursor-glass-body" d="M 5 6 L 5 25 L 11 19 L 15 27 L 17 26 L 14 18 L 21 18 Z" />
+                        <path class="svg-cursor-specular" d="M 5 6 L 5 24 L 10 19 Z" />
                     </svg>
                     <div class="cursor-sparkle-dot"></div>
                 </div>
@@ -267,7 +267,7 @@
         });
 
         const pointerWrapEl = cursorEl.querySelector('.cursor-pointer-wrap');
-        const BASE_UPRIGHT_ANGLE = -35; // Sets cursor to ~80-degree steep upright orientation
+        const BASE_UPRIGHT_ANGLE = 0; // Standard 90-degree classic OS mouse orientation
         let currentRotation = BASE_UPRIGHT_ANGLE;
 
         function animLoop() {
@@ -286,7 +286,7 @@
                     const velocity = Math.sqrt(vx * vx + vy * vy);
                     if (velocity > 1) {
                         const targetAngle = Math.atan2(vy, vx) * (180 / Math.PI) - 45;
-                        const clampedAngle = Math.max(-20, Math.min(20, targetAngle));
+                        const clampedAngle = Math.max(-15, Math.min(15, targetAngle));
                         const destAngle = BASE_UPRIGHT_ANGLE + clampedAngle;
                         currentRotation += (destAngle - currentRotation) * 0.15;
                     } else {
