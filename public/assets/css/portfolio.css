@@ -638,7 +638,7 @@ footer.transparent-footer {
 .timeline-item:hover .timeline-node {
   background: var(--accent);
   border-color: #fff;
-  box-shadow: 0 0 20px var(--accent), 0 0 30px #f50057;
+  box-shadow: 0 0 20px var(--accent), 0 0 30px rgba(0, 180, 255, 0.5);
 }
 
 .timeline-card {
@@ -661,8 +661,8 @@ footer.transparent-footer {
   left: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(180deg, var(--accent), #f50057);
-  opacity: 0.7;
+  background: linear-gradient(180deg, #00E5FF, #00B0FF);
+  opacity: 0.75;
   transition: opacity 0.3s ease;
 }
 
@@ -1078,11 +1078,11 @@ footer.transparent-footer {
 }
 
 .overlay-close-btn:hover {
-  background: rgba(245, 0, 87, 0.25);
-  border-color: #f50057;
-  color: #f50057;
+  background: rgba(0, 229, 255, 0.15);
+  border-color: #00E5FF;
+  color: #00E5FF;
   transform: rotate(90deg);
-  box-shadow: 0 0 20px rgba(245, 0, 87, 0.3);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
 }
 
 .overlay-nav-grid {
