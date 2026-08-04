@@ -1,5 +1,5 @@
 // =========================================================
-// LAYOUT COMPONENTS — Universal Top Transparent Navbar & Footer
+// LAYOUT COMPONENTS — Universal Top Transparent Navbar & End Page Footer
 // =========================================================
 
 (function () {
@@ -48,8 +48,8 @@
     }
 
     async function renderUniversalLayout() {
-        const container = document.getElementById('fixed-ui');
-        if (!container) return;
+        const fixedContainer = document.getElementById('fixed-ui');
+        const scrollContainer = document.getElementById('scroll-content') || document.body;
 
         const currentPage = getCurrentPage();
         const navItems = await fetchNavFromAPI();
@@ -68,22 +68,32 @@
             return `<a href="${item.url}"${activeClass}>${escapeHTML(item.label)}</a>`;
         }).join('\n                    ');
 
-        container.innerHTML = `
-        <header class="top-navbar interactive">
-            <div class="nav-brand">
-                <a href="index.html" class="logo">A<span class="logo-x">H</span></a>
-            </div>
+        // 1. Render Header in #fixed-ui
+        if (fixedContainer) {
+            fixedContainer.innerHTML = `
+            <header class="top-navbar interactive">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">A<span class="logo-x">H</span></a>
+                </div>
 
-            <nav class="top-nav-links">
-                ${navLinksHtml}
-            </nav>
+                <nav class="top-nav-links">
+                    ${navLinksHtml}
+                </nav>
 
-            <div class="nav-right">
-                <div class="yesex-logo">${escapeHTML(badgeText)}</div>
-            </div>
-        </header>
+                <div class="nav-right">
+                    <div class="yesex-logo">${escapeHTML(badgeText)}</div>
+                </div>
+            </header>
+            `;
+        }
 
-        <footer class="transparent-footer interactive">
+        // 2. Remove old footer if exists, then append new footer to end of #scroll-content
+        const existingFooter = document.querySelector('.transparent-footer');
+        if (existingFooter) existingFooter.remove();
+
+        const footerEl = document.createElement('footer');
+        footerEl.className = 'transparent-footer interactive';
+        footerEl.innerHTML = `
             <div class="footer-col brand-col">
                 <a href="index.html" class="footer-logo">A<span class="logo-x">H</span></a>
                 <p class="footer-desc">Jr. Software Engineer (SQA) & Project Manager bridging technical excellence with operational efficiency.</p>
@@ -112,8 +122,9 @@
                     <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub ↗</a>
                 </div>
             </div>
-        </footer>
         `;
+
+        scrollContainer.appendChild(footerEl);
     }
 
     function escapeHTML(str) {
