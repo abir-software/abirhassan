@@ -60,10 +60,18 @@ app.use('/api/navigation', navigationRouter);
 app.use('/api/testimonials', testimonialsRouter);
 
 // ─── Serve Admin Panel ───────────────────────────────────
-app.use('/admin', express.static(join(__dirname, '..', 'admin')));
-app.get('/admin/*splat', (req, res) => {
-    res.sendFile(join(__dirname, '..', 'admin', 'index.html'));
-});
+const distAdminDir = join(__dirname, '..', 'dist', 'admin');
+if (existsSync(distAdminDir)) {
+    app.use('/admin', express.static(distAdminDir));
+    app.get(['/admin', '/admin/*'], (req, res) => {
+        res.sendFile(join(distAdminDir, 'index.html'));
+    });
+} else {
+    app.use('/admin', express.static(join(__dirname, '..', 'admin')));
+    app.get(['/admin', '/admin/*'], (req, res) => {
+        res.sendFile(join(__dirname, '..', 'admin', 'index.html'));
+    });
+}
 
 // ─── Serve Frontend (dist or root) ───────────────────────
 const distDir = join(__dirname, '..', 'dist');
