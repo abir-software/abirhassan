@@ -294,9 +294,9 @@ if (navCount.c === 0) {
         ['ABOUT', 'about.html', 'footer_left', 1],
         ['EXPERIENCE', 'experience.html', 'footer_left', 2],
         ['QA & TESTING', 'qa-testing.html', 'footer_left', 3],
-        ['PM DETAILS', 'pm-details.html', 'footer_left', 4],
-        ['PROJECTS', 'projects.html', 'footer_left', 5],
-        ['WEB DEV', 'web-dev.html', 'footer_left', 6],
+        ['PM', 'pm-details.html', 'footer_left', 4],
+        ['WEB DEV', 'web-dev.html', 'footer_left', 5],
+        ['PROJECTS', 'projects.html', 'footer_left', 6],
         ['BLOG', 'blog.html', 'footer_left', 7],
         ['CONTACT', 'contact.html', 'footer_right', 8],
     ].forEach(r => ins.run(...r));
