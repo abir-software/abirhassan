@@ -1670,3 +1670,58 @@ footer.transparent-footer {
   transition: transform 0.3s ease;
 }
 
+/* ==========================================================================
+   BACK TO TOP FLOATING 3D GLASS BUTTON
+   ========================================================================== */
+
+.back-to-top-btn {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(10, 16, 28, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2500;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8) translateY(10px);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    inset 1.5px 1.5px 6px rgba(255, 255, 255, 0.2),
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(0, 229, 255, 0.15);
+}
+
+.back-to-top-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1) translateY(0);
+}
+
+.back-to-top-btn:hover {
+  transform: translateY(-4px) scale(1.1);
+  background: rgba(0, 229, 255, 0.18) !important;
+  border-color: var(--accent);
+  box-shadow: 
+    inset 2px 2px 8px rgba(255, 255, 255, 0.35),
+    0 12px 30px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(0, 229, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+  .back-to-top-btn {
+    bottom: 25px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+}
+

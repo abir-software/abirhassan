@@ -160,6 +160,37 @@
                 </div>
             `;
         }
+
+        // 3. Initialize Back to Top Button
+        initBackToTop();
+    }
+
+    function initBackToTop() {
+        let topBtn = document.getElementById('back-to-top-btn');
+        if (!topBtn) {
+            topBtn = document.createElement('button');
+            topBtn.id = 'back-to-top-btn';
+            topBtn.className = 'back-to-top-btn interactive';
+            topBtn.setAttribute('aria-label', 'Scroll back to top');
+            topBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#00E5FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            `;
+            document.body.appendChild(topBtn);
+
+            topBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    topBtn.classList.add('visible');
+                } else {
+                    topBtn.classList.remove('visible');
+                }
+            });
+        }
     }
 
     function bindMobileMenuEvents() {
