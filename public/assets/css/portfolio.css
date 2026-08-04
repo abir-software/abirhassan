@@ -1539,15 +1539,15 @@ footer.transparent-footer {
 
 .contact-card {
   position: relative;
-  background: rgba(10, 16, 28, 0.55) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(10, 16, 28, 0.12) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1.5px solid rgba(255, 255, 255, 0.18);
   border-radius: 24px;
   padding: 40px;
   box-shadow: 
     inset 2px 2px 12px rgba(255, 255, 255, 0.15),
-    0 15px 40px rgba(0, 0, 0, 0.5),
+    0 15px 40px rgba(0, 0, 0, 0.3),
     0 0 30px rgba(0, 229, 255, 0.15);
   margin-top: 25px;
   width: 100%;
@@ -1575,7 +1575,7 @@ footer.transparent-footer {
 .form-group textarea {
   width: 100%;
   padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   color: #ffffff;
@@ -1585,8 +1585,8 @@ footer.transparent-footer {
   box-sizing: border-box;
   outline: none;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
