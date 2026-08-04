@@ -1425,12 +1425,12 @@ footer.transparent-footer {
 footer.transparent-footer {
   margin-top: 80px;
   padding: 45px 6vw;
-  background: rgba(255, 255, 255, 0.001) !important;
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
+  background: rgba(255, 255, 255, 0.002) !important;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 32px 32px 0 0;
-  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   display: grid;
   grid-template-columns: 1.5fr 1fr 1.2fr;
   gap: 40px;
