@@ -19,7 +19,7 @@ const heroExists = db.prepare('SELECT id FROM hero WHERE id = 1').get();
 if (!heroExists) {
     db.prepare(`INSERT INTO hero (id, name, role, company, summary, titles, stats, cta_primary, cta_secondary) VALUES (1,?,?,?,?,?,?,?,?)`).run(
         'Md Abir Hassan',
-        'Jr. Software Engineer (SQA)',
+        'Software Engineer',
         'Daffodil Software Ltd.',
         'Experienced professional with 4+ years of experience across Software Quality Assurance, Project Management, Corporate Administration, and Frontend Web Development. Successfully contributed to 50+ software projects including university ERP systems, corporate platforms, and international solutions.',
         JSON.stringify(['Software Engineer', 'QA Specialist', 'Project Manager', 'Frontend Developer']),

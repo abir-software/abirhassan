@@ -90,7 +90,7 @@
             footerEl.innerHTML = `
                 <div class="footer-col brand-col">
                     <a href="index.html" class="footer-logo">A<span class="logo-x">H</span></a>
-                    <p class="footer-desc">Jr. Software Engineer (SQA) & Project Manager bridging technical excellence with operational efficiency.</p>
+                    <p class="footer-desc">Software Engineer & Project Manager bridging technical excellence with operational efficiency.</p>
                     <div class="footer-copy">© 2026 Md Abir Hassan. All rights reserved.</div>
                 </div>
 
