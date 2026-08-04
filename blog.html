@@ -61,39 +61,14 @@
 
         @media (max-width: 1024px) { .content-wrapper { max-width: 80vw; } .hero-text { font-size: 70px; } }
         @media (max-width: 768px) { .section { padding: 40px 8vw; } .content-wrapper { max-width: 100vw; text-align: left; } .social-links { display: none; } footer { flex-direction: column; gap: 15px; text-align: center; } .footer-left, .footer-right { justify-content: center; } header { padding: 25px 8vw; } .hero-text { font-size: 50px; } }
-    </style>
+    <link rel="stylesheet" href="/assets/css/portfolio.css">
+    <script src="/assets/js/layout-components.js"></script>
 </head>
 <body>
     <canvas id="animationCanvas"></canvas>
     <div class="overlay"></div>
     
-    <div id="fixed-ui">
-        <header class="interactive">
-            <a href="index.html" class="logo">A<span class="logo-x">H</span></a>
-            <div class="right-logo"><div class="yesex-logo">BLOG</div></div>
-        </header>
-
-        <div class="social-links interactive">
-            <a href="https://linkedin.com/in/abirhassan">LINKEDIN</a>
-            <a href="#">GITHUB</a>
-        </div>
-
-        <footer class="interactive">
-            <div class="footer-left">
-                <a href="index.html">HOME</a>
-                <a href="about.html">ABOUT</a>
-                <a href="experience.html">EXPERIENCE</a>
-                <a href="qa-testing.html">QA & TESTING</a>
-                <a href="pm-details.html">PM DETAILS</a>
-                <a href="projects.html">PROJECTS</a>
-                <a href="web-dev.html">WEB DEV</a>
-                <a href="blog.html" class="active">BLOG</a>
-            </div>
-            <div class="footer-right">
-                <a href="contact.html">CONTACT</a>
-            </div>
-        </footer>
-    </div>
+    <div id="fixed-ui"></div>
 
     <div id="scroll-content">
         <section class="section hero align-right">
@@ -217,6 +192,5 @@
         loadCategories();
         loadBlogs();
     </script>
-    <script src="/assets/js/layout-components.js"></script>
 </body>
 </html>

@@ -36,39 +36,31 @@
         return page || 'index.html';
     }
 
-    async function fetchNavFromAPI() {
-        try {
-            const res = await fetch('/api/navigation');
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const data = await res.json();
-            return (Array.isArray(data) && data.length > 0) ? data : DEFAULT_NAV;
-        } catch (e) {
-            return DEFAULT_NAV;
-        }
+    function isLinkActive(url, currentPage) {
+        if (!url) return false;
+        const cleanUrl = url.split('/').pop().split('?')[0];
+        if (cleanUrl === currentPage) return true;
+        if ((currentPage === '' || currentPage === 'index.html') && cleanUrl === 'index.html') return true;
+        return false;
     }
 
-    async function renderUniversalLayout() {
+    function buildNavHtml(navItems, currentPage) {
+        return navItems.map(item => {
+            const activeClass = isLinkActive(item.url, currentPage) ? ' class="active"' : '';
+            return `<a href="${item.url}"${activeClass}>${escapeHTML(item.label)}</a>`;
+        }).join('\n                    ');
+    }
+
+    // ─── INSTANT SYNCHRONOUS RENDER ───────────────────────────
+    function renderImmediateLayout(navItems) {
         const fixedContainer = document.getElementById('fixed-ui');
         const scrollContainer = document.getElementById('scroll-content') || document.body;
 
         const currentPage = getCurrentPage();
-        const navItems = await fetchNavFromAPI();
         const badgeText = PAGE_BADGES[currentPage] || 'PORTFOLIO';
+        const navLinksHtml = buildNavHtml(navItems, currentPage);
 
-        function isLinkActive(url) {
-            if (!url) return false;
-            const cleanUrl = url.split('/').pop().split('?')[0];
-            if (cleanUrl === currentPage) return true;
-            if ((currentPage === '' || currentPage === 'index.html') && cleanUrl === 'index.html') return true;
-            return false;
-        }
-
-        const navLinksHtml = navItems.map(item => {
-            const activeClass = isLinkActive(item.url) ? ' class="active"' : '';
-            return `<a href="${item.url}"${activeClass}>${escapeHTML(item.label)}</a>`;
-        }).join('\n                    ');
-
-        // 1. Render Header in #fixed-ui
+        // 1. Render Header in #fixed-ui immediately
         if (fixedContainer) {
             fixedContainer.innerHTML = `
             <header class="top-navbar interactive">
@@ -87,12 +79,14 @@
             `;
         }
 
-        // 2. Remove old footer if exists, then append new footer to end of #scroll-content
-        const existingFooter = document.querySelector('.transparent-footer');
-        if (existingFooter) existingFooter.remove();
+        // 2. Render Footer at end of #scroll-content
+        let footerEl = document.querySelector('.transparent-footer');
+        if (!footerEl) {
+            footerEl = document.createElement('footer');
+            footerEl.className = 'transparent-footer interactive';
+            scrollContainer.appendChild(footerEl);
+        }
 
-        const footerEl = document.createElement('footer');
-        footerEl.className = 'transparent-footer interactive';
         footerEl.innerHTML = `
             <div class="footer-col brand-col">
                 <a href="index.html" class="footer-logo">A<span class="logo-x">H</span></a>
@@ -123,8 +117,20 @@
                 </div>
             </div>
         `;
+    }
 
-        scrollContainer.appendChild(footerEl);
+    // ─── BACKGROUND API SYNC ──────────────────────────────────
+    async function syncNavFromAPI() {
+        try {
+            const res = await fetch('/api/navigation');
+            if (!res.ok) return;
+            const data = await res.json();
+            if (Array.isArray(data) && data.length > 0) {
+                renderImmediateLayout(data);
+            }
+        } catch (e) {
+            // Ignore API failures silently, DEFAULT_NAV is already rendered
+        }
     }
 
     function escapeHTML(str) {
@@ -136,9 +142,15 @@
             .replace(/'/g, '&#039;');
     }
 
+    // Render INSTANTLY on script load
+    renderImmediateLayout(DEFAULT_NAV);
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderUniversalLayout);
+        document.addEventListener('DOMContentLoaded', () => {
+            renderImmediateLayout(DEFAULT_NAV);
+            syncNavFromAPI();
+        });
     } else {
-        renderUniversalLayout();
+        syncNavFromAPI();
     }
 })();
