@@ -1730,20 +1730,11 @@ footer.transparent-footer {
    ========================================================================== */
 
 @media (pointer: fine) {
-  body.has-custom-cursor, 
-  body.has-custom-cursor a, 
-  body.has-custom-cursor button, 
-  body.has-custom-cursor input, 
-  body.has-custom-cursor textarea, 
-  body.has-custom-cursor select, 
-  body.has-custom-cursor label, 
-  body.has-custom-cursor .interactive, 
-  body.has-custom-cursor .card, 
-  body.has-custom-cursor .waterdrop-card, 
-  body.has-custom-cursor .timeline-card, 
-  body.has-custom-cursor .mini-social-icon, 
-  body.has-custom-cursor .btn,
-  body.has-custom-cursor .top-nav-links a {
+  body.has-custom-cursor,
+  body.has-custom-cursor *,
+  body.has-custom-cursor *:hover,
+  body.has-custom-cursor *:active,
+  body.has-custom-cursor *:focus {
     cursor: none !important;
   }
 }
