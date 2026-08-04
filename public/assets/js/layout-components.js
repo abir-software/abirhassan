@@ -51,7 +51,6 @@
         }).join('\n                    ');
     }
 
-    // ─── INSTANT SYNCHRONOUS RENDER ───────────────────────────
     function renderImmediateLayout(navItems) {
         const fixedContainer = document.getElementById('fixed-ui');
         const scrollContainer = document.getElementById('scroll-content') || document.body;
@@ -60,7 +59,7 @@
         const badgeText = PAGE_BADGES[currentPage] || 'PORTFOLIO';
         const navLinksHtml = buildNavHtml(navItems, currentPage);
 
-        // 1. Render Header in #fixed-ui immediately
+        // 1. Render Header in #fixed-ui
         if (fixedContainer) {
             fixedContainer.innerHTML = `
             <header class="top-navbar interactive">
@@ -80,46 +79,47 @@
         }
 
         // 2. Render Footer at end of #scroll-content
-        let footerEl = document.querySelector('.transparent-footer');
-        if (!footerEl) {
-            footerEl = document.createElement('footer');
-            footerEl.className = 'transparent-footer interactive';
-            scrollContainer.appendChild(footerEl);
+        if (scrollContainer) {
+            let footerEl = document.querySelector('.transparent-footer');
+            if (!footerEl) {
+                footerEl = document.createElement('footer');
+                footerEl.className = 'transparent-footer interactive';
+                scrollContainer.appendChild(footerEl);
+            }
+
+            footerEl.innerHTML = `
+                <div class="footer-col brand-col">
+                    <a href="index.html" class="footer-logo">A<span class="logo-x">H</span></a>
+                    <p class="footer-desc">Jr. Software Engineer (SQA) & Project Manager bridging technical excellence with operational efficiency.</p>
+                    <div class="footer-copy">© 2026 Md Abir Hassan. All rights reserved.</div>
+                </div>
+
+                <div class="footer-col info-col">
+                    <div class="footer-heading">CONTACT & LOCATION</div>
+                    <div class="footer-info-item">📍 Dhaka, Bangladesh</div>
+                    <div class="footer-info-item">📧 mdabirhassan2@gmail.com</div>
+                    <div class="footer-info-item">🏢 Daffodil Software Ltd.</div>
+                </div>
+
+                <div class="footer-col links-col">
+                    <div class="footer-heading">QUICK LINKS</div>
+                    <div class="footer-links-grid">
+                        <a href="index.html">Home</a>
+                        <a href="about.html">About</a>
+                        <a href="experience.html">Experience</a>
+                        <a href="projects.html">Projects</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                    <div class="footer-socials">
+                        <a href="https://linkedin.com/in/abirhassan" target="_blank" rel="noopener">LinkedIn ↗</a>
+                        <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub ↗</a>
+                    </div>
+                </div>
+            `;
         }
-
-        footerEl.innerHTML = `
-            <div class="footer-col brand-col">
-                <a href="index.html" class="footer-logo">A<span class="logo-x">H</span></a>
-                <p class="footer-desc">Jr. Software Engineer (SQA) & Project Manager bridging technical excellence with operational efficiency.</p>
-                <div class="footer-copy">© 2026 Md Abir Hassan. All rights reserved.</div>
-            </div>
-
-            <div class="footer-col info-col">
-                <div class="footer-heading">CONTACT & LOCATION</div>
-                <div class="footer-info-item">📍 Dhaka, Bangladesh</div>
-                <div class="footer-info-item">📧 mdabirhassan2@gmail.com</div>
-                <div class="footer-info-item">🏢 Daffodil Software Ltd.</div>
-            </div>
-
-            <div class="footer-col links-col">
-                <div class="footer-heading">QUICK LINKS</div>
-                <div class="footer-links-grid">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="experience.html">Experience</a>
-                    <a href="projects.html">Projects</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-                <div class="footer-socials">
-                    <a href="https://linkedin.com/in/abirhassan" target="_blank" rel="noopener">LinkedIn ↗</a>
-                    <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub ↗</a>
-                </div>
-            </div>
-        `;
     }
 
-    // ─── BACKGROUND API SYNC ──────────────────────────────────
     async function syncNavFromAPI() {
         try {
             const res = await fetch('/api/navigation');
@@ -129,7 +129,7 @@
                 renderImmediateLayout(data);
             }
         } catch (e) {
-            // Ignore API failures silently, DEFAULT_NAV is already rendered
+            // Ignore API errors silently
         }
     }
 
@@ -142,15 +142,14 @@
             .replace(/'/g, '&#039;');
     }
 
-    // Render INSTANTLY on script load
-    renderImmediateLayout(DEFAULT_NAV);
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            renderImmediateLayout(DEFAULT_NAV);
-            syncNavFromAPI();
-        });
-    } else {
+    function init() {
+        renderImmediateLayout(DEFAULT_NAV);
         syncNavFromAPI();
+    }
+
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        init();
+    } else {
+        document.addEventListener('DOMContentLoaded', init);
     }
 })();
