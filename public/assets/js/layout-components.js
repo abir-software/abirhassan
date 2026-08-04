@@ -268,16 +268,16 @@
             }
         });
 
+        const pointerWrapEl = cursorEl.querySelector('.cursor-pointer-wrap');
+
         function animLoop() {
             if (isVisible) {
+                // Outer container locks INSTANTLY to exact mouse position (no tip lag)
+                cursorEl.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+
                 if (prefersReducedMotion) {
-                    cursorX = mouseX;
-                    cursorY = mouseY;
                     currentRotation = 0;
                 } else {
-                    cursorX += (mouseX - cursorX) * 0.22;
-                    cursorY += (mouseY - cursorY) * 0.22;
-
                     const vx = mouseX - prevMouseX;
                     const vy = mouseY - prevMouseY;
                     prevMouseX = mouseX;
@@ -286,17 +286,20 @@
                     const velocity = Math.sqrt(vx * vx + vy * vy);
                     if (velocity > 1) {
                         const targetAngle = Math.atan2(vy, vx) * (180 / Math.PI) - 45;
-                        const clampedAngle = Math.max(-25, Math.min(25, targetAngle));
+                        const clampedAngle = Math.max(-20, Math.min(20, targetAngle));
                         currentRotation += (clampedAngle - currentRotation) * 0.15;
                     } else {
                         currentRotation += (0 - currentRotation) * 0.1;
                     }
                 }
 
-                let scaleStr = isHovered ? 'scale(1.2)' : 'scale(1)';
+                let scaleStr = isHovered ? 'scale(1.18)' : 'scale(1)';
                 if (isClicked) scaleStr = 'scale(0.88)';
 
-                cursorEl.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) ${scaleStr} rotate(${currentRotation}deg)`;
+                // Rotate & scale inner body anchored precisely at the top tip (4px, 4px)
+                if (pointerWrapEl) {
+                    pointerWrapEl.style.transform = `rotate(${currentRotation}deg) ${scaleStr}`;
+                }
             }
 
             requestAnimationFrame(animLoop);
