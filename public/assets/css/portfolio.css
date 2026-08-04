@@ -1585,7 +1585,7 @@ footer.transparent-footer {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 20px;
+    gap: 16px;
     padding: 30px 20px;
     border-radius: 24px 24px 0 0;
   }
@@ -1604,6 +1604,14 @@ footer.transparent-footer {
     text-align: center;
   }
 
+  .footer-col.links-col {
+    order: 1;
+  }
+
+  .footer-col.brand-col {
+    order: 2;
+  }
+
   .footer-heading {
     display: none;
   }
@@ -1613,7 +1621,7 @@ footer.transparent-footer {
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px 20px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 
   .footer-mini-contact-bar {
@@ -1621,7 +1629,13 @@ footer.transparent-footer {
     justify-content: center;
     align-items: center;
     gap: 14px;
-    margin: 10px 0 15px 0;
+    margin: 8px 0 14px 0;
+  }
+
+  .footer-copy {
+    order: 99;
+    margin-top: 10px;
+    font-size: 11px;
   }
 }
 
