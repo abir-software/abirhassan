@@ -161,8 +161,148 @@
             `;
         }
 
-        // 3. Initialize Back to Top Button
+        // 3. Initialize Back to Top Button & Custom 3D Rainbow Glass Cursor
         initBackToTop();
+        initCustomGlassCursor();
+    }
+
+    function initCustomGlassCursor() {
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 768) {
+            return;
+        }
+
+        let cursorEl = document.getElementById('custom-glass-cursor');
+        if (!cursorEl) {
+            cursorEl = document.createElement('div');
+            cursorEl.id = 'custom-glass-cursor';
+            cursorEl.className = 'custom-glass-cursor';
+            cursorEl.innerHTML = `
+                <div class="cursor-glow-ring"></div>
+                <div class="cursor-shadow-pod"></div>
+                <div class="cursor-pointer-wrap">
+                    <svg class="cursor-arrow-svg" viewBox="0 0 36 36" width="36" height="36">
+                        <defs>
+                            <linearGradient id="rainbow-iridescent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00E5FF" />
+                                <stop offset="20%" stop-color="#3B82F6" />
+                                <stop offset="40%" stop-color="#8B5CF6" />
+                                <stop offset="60%" stop-color="#EC4899" />
+                                <stop offset="80%" stop-color="#F97316" />
+                                <stop offset="100%" stop-color="#10B981" />
+                            </linearGradient>
+                            <linearGradient id="glass-specular-shine" x1="0%" y1="0%" x2="50%" y2="100%">
+                                <stop offset="0%" stop-color="rgba(255, 255, 255, 0.95)" />
+                                <stop offset="50%" stop-color="rgba(255, 255, 255, 0.3)" />
+                                <stop offset="100%" stop-color="rgba(255, 255, 255, 0.05)" />
+                            </linearGradient>
+                        </defs>
+                        <path class="svg-cursor-shadow" d="M 4 4 L 14 30 L 19 18 L 30 14 Z" />
+                        <path class="svg-cursor-rainbow" d="M 4 4 L 14 30 L 19 18 L 30 14 Z" />
+                        <path class="svg-cursor-glass-body" d="M 5 6 L 13 27 L 17 17 L 27 13 Z" />
+                        <path class="svg-cursor-specular" d="M 5 6 L 12 21 L 15 16 L 22 13 Z" />
+                    </svg>
+                    <div class="cursor-sparkle-dot"></div>
+                </div>
+            `;
+            document.body.appendChild(cursorEl);
+        }
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let cursorX = mouseX;
+        let cursorY = mouseY;
+        let prevMouseX = mouseX;
+        let prevMouseY = mouseY;
+        let currentRotation = 0;
+        let isHovered = false;
+        let isClicked = false;
+        let isVisible = false;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        window.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (!isVisible) {
+                isVisible = true;
+                cursorEl.classList.add('active');
+            }
+        });
+
+        document.addEventListener('mouseleave', () => {
+            isVisible = false;
+            cursorEl.classList.remove('active');
+        });
+
+        document.addEventListener('mouseenter', () => {
+            isVisible = true;
+            cursorEl.classList.add('active');
+        });
+
+        document.addEventListener('mousedown', () => {
+            isClicked = true;
+            cursorEl.classList.add('clicking');
+        });
+
+        document.addEventListener('mouseup', () => {
+            isClicked = false;
+            cursorEl.classList.remove('clicking');
+        });
+
+        const interactiveSelector = 'a, button, input, textarea, select, label, .interactive, .card, .waterdrop-card, .timeline-card, .mini-social-icon, .btn, .top-nav-links a, .social-pills a';
+
+        document.addEventListener('mouseover', e => {
+            if (e.target && e.target.closest(interactiveSelector)) {
+                isHovered = true;
+                cursorEl.classList.add('hovering');
+            }
+        });
+
+        document.addEventListener('mouseout', e => {
+            if (e.target && e.target.closest(interactiveSelector)) {
+                const related = e.relatedTarget;
+                if (!related || !related.closest(interactiveSelector)) {
+                    isHovered = false;
+                    cursorEl.classList.remove('hovering');
+                }
+            }
+        });
+
+        function animLoop() {
+            if (isVisible) {
+                if (prefersReducedMotion) {
+                    cursorX = mouseX;
+                    cursorY = mouseY;
+                    currentRotation = 0;
+                } else {
+                    cursorX += (mouseX - cursorX) * 0.22;
+                    cursorY += (mouseY - cursorY) * 0.22;
+
+                    const vx = mouseX - prevMouseX;
+                    const vy = mouseY - prevMouseY;
+                    prevMouseX = mouseX;
+                    prevMouseY = mouseY;
+
+                    const velocity = Math.sqrt(vx * vx + vy * vy);
+                    if (velocity > 1) {
+                        const targetAngle = Math.atan2(vy, vx) * (180 / Math.PI) - 45;
+                        const clampedAngle = Math.max(-25, Math.min(25, targetAngle));
+                        currentRotation += (clampedAngle - currentRotation) * 0.15;
+                    } else {
+                        currentRotation += (0 - currentRotation) * 0.1;
+                    }
+                }
+
+                let scaleStr = isHovered ? 'scale(1.2)' : 'scale(1)';
+                if (isClicked) scaleStr = 'scale(0.88)';
+
+                cursorEl.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) ${scaleStr} rotate(${currentRotation}deg)`;
+            }
+
+            requestAnimationFrame(animLoop);
+        }
+
+        requestAnimationFrame(animLoop);
     }
 
     function initBackToTop() {
