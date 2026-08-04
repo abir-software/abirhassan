@@ -26,7 +26,7 @@ if (!heroExists) {
         JSON.stringify([
             { value: '50+', label: 'QA & Testing' },
             { value: '17+', label: 'Web Developed' },
-            { value: '6', label: 'Projects Managed' },
+            { value: '6+', label: 'Projects Managed' },
             { value: '4+', label: 'Years Experience' }
         ]),
         'View Projects',
