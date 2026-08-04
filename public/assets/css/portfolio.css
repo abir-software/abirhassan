@@ -54,29 +54,26 @@ canvas#animationCanvas {
   pointer-events: auto;
 }
 
-/* ─── Modern Transparent Top Navbar ───────────────────────── */
+/* ─── Modern Centered Floating Island Top Navbar ─────────── */
 header.top-navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 18px 5vw;
+  padding: 20px 5vw;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: transparent !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   z-index: 1000;
-  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
-.nav-brand {
-  display: flex;
-  align-items: center;
+.nav-brand,
+.nav-right {
+  pointer-events: auto;
 }
 
 .logo {
@@ -98,11 +95,23 @@ header.top-navbar {
   color: var(--accent);
 }
 
+/* Centered Floating Glass Pill Sheet for Nav Links */
 .top-nav-links {
+  pointer-events: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 30px;
+  padding: 5px 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
 .top-nav-links a {
@@ -122,8 +131,8 @@ header.top-navbar {
 
 .top-nav-links a:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .top-nav-links a.active {
