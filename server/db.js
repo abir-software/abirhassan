@@ -1,14 +1,30 @@
 // ========================================
 // DB — SQLite setup & schema
 // ========================================
-import Database from 'better-sqlite3';
+import { DatabaseSync } from 'node:sqlite';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DB_PATH = join(__dirname, 'portfolio.db');
 
-const db = new Database(DB_PATH);
+const db = new DatabaseSync(DB_PATH);
+
+// Compatibility helpers for better-sqlite3 interface
+db.pragma = (str) => {
+  try { db.exec(`PRAGMA ${str}`); } catch (e) {}
+};
+db.transaction = (fn) => (...args) => {
+  db.exec('BEGIN IMMEDIATE');
+  try {
+    const result = fn(...args);
+    db.exec('COMMIT');
+    return result;
+  } catch (err) {
+    db.exec('ROLLBACK');
+    throw err;
+  }
+};
 
 // Enable WAL mode for better performance
 db.pragma('journal_mode = WAL');
