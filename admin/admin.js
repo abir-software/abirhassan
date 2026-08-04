@@ -75,7 +75,17 @@ function doLogout() {
     localStorage.removeItem('cms_token');
     document.getElementById('app').style.display = 'none';
     document.getElementById('login-screen').style.display = 'flex';
+    const uInput = document.getElementById('login-username');
+    const pInput = document.getElementById('login-password');
+    if (uInput) uInput.value = '';
+    if (pInput) pInput.value = '';
+    const errEl = document.getElementById('login-error');
+    if (errEl) errEl.style.display = 'none';
+    toast('Logged out successfully', 'success');
 }
+
+window.doLogout = doLogout;
+window.doLogin = doLogin;
 
 function showApp() {
     document.getElementById('login-screen').style.display = 'none';
@@ -101,6 +111,14 @@ window.addEventListener('DOMContentLoaded', () => {
     // Login on Enter key
     document.getElementById('login-password').addEventListener('keydown', e => {
         if (e.key === 'Enter') doLogin();
+    });
+
+    // Logout button handlers
+    document.querySelectorAll('.logout-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            doLogout();
+        });
     });
 
     // Nav click handlers
