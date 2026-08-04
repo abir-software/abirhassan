@@ -24,10 +24,10 @@ if (!heroExists) {
         'Experienced professional with 4+ years of experience across Software Quality Assurance, Project Management, Corporate Administration, and Frontend Web Development. Successfully contributed to 50+ software projects including university ERP systems, corporate platforms, and international solutions.',
         JSON.stringify(['Software Engineer', 'QA Specialist', 'Project Manager', 'Frontend Developer']),
         JSON.stringify([
-            { value: '4+', label: 'Years Experience' },
-            { value: '50+', label: 'Projects' },
-            { value: '15+', label: 'Clients' },
-            { value: '100%', label: 'Quality' }
+            { value: '50+', label: 'QA & Testing' },
+            { value: '17+', label: 'Web Developed' },
+            { value: '6', label: 'Projects Managed' },
+            { value: '4+', label: 'Years Experience' }
         ]),
         'View Projects',
         'Download CV'
