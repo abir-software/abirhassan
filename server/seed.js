@@ -238,7 +238,7 @@ const certCount = db.prepare('SELECT COUNT(*) as c FROM certifications').get();
 if (certCount.c === 0) {
     const ins = db.prepare('INSERT INTO certifications (icon, name, issuer, sort_order) VALUES (?,?,?,?)');
     [
-        ['📋', 'PMP Certification', 'Project Management Institute', 0],
+        ['📋', 'PMP Training Certificate', 'Project Management Institute', 0],
         ['🧪', 'Software Testing & QA', 'Professional Certification', 1],
         ['🔄', 'Agile & Project Management', 'Agile Alliance', 2],
         ['📊', 'Google Analytics', 'Google', 3],
