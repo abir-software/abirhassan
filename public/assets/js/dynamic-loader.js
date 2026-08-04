@@ -96,42 +96,69 @@
             <div class="career-timeline">
                 ${data.map((item, idx) => {
                     const badge = idx === 0 ? 'PRESENT ROLE' : (item.duration || 'MILESTONE');
-                    let highlightsHtml = '';
-                    if (item.highlights) {
+                    const isDaffodil = item.company && item.company.includes('Daffodil');
+                    const logoHtml = isDaffodil ? `<img src="/assets/images/daffodilgroup.jpg" alt="${escapeHTML(item.company)}" class="company-logo-img">` : '';
+                    
+                    let responsibilitiesHtml = '';
+                    const respSource = item.responsibilities || item.highlights;
+                    if (respSource) {
                         try {
-                            const arr = typeof item.highlights === 'string' ? JSON.parse(item.highlights) : item.highlights;
+                            const arr = typeof respSource === 'string' ? JSON.parse(respSource) : respSource;
                             if (Array.isArray(arr) && arr.length > 0) {
-                                highlightsHtml = `
+                                responsibilitiesHtml = `
                                     <div class="timeline-highlights">
                                         ${arr.map(h => `<div class="timeline-highlight-item">${escapeHTML(h)}</div>`).join('')}
                                     </div>
                                 `;
                             }
                         } catch (e) {
-                            if (typeof item.highlights === 'string') {
-                                highlightsHtml = `
+                            if (typeof respSource === 'string') {
+                                responsibilitiesHtml = `
                                     <div class="timeline-highlights">
-                                        <div class="timeline-highlight-item">${escapeHTML(item.highlights)}</div>
+                                        <div class="timeline-highlight-item">${escapeHTML(respSource)}</div>
                                     </div>
                                 `;
                             }
                         }
                     }
 
+                    let tagsHtml = '';
+                    if (item.skills) {
+                        const tags = typeof item.skills === 'string' ? item.skills.split(',').map(s => s.trim()) : item.skills;
+                        if (Array.isArray(tags) && tags.length > 0) {
+                            tagsHtml = `
+                                <div class="tags" style="margin-top: 15px;">
+                                    ${tags.map(t => `<span class="tag">${escapeHTML(t)}</span>`).join('')}
+                                </div>
+                            `;
+                        }
+                    }
+
+                    const locationText = isDaffodil ? '📍 Daffodil Tower, 102/1, Shukrabad, Mirpur Road, Dhaka-1207, Bangladesh · On-site' : '';
+
                     return `
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
                             <div class="timeline-card">
                                 <div class="timeline-header">
-                                    <h3 class="timeline-title">${escapeHTML(item.role || item.title || '')}</h3>
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        ${logoHtml}
+                                        <div>
+                                            <h3 class="timeline-title">${escapeHTML(item.role || item.title || '')}</h3>
+                                            <div class="timeline-company" style="margin-bottom: 0; margin-top: 4px;">
+                                                <span>🏢 ${escapeHTML(item.company || '')}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <span class="timeline-badge">${escapeHTML(badge)}</span>
                                 </div>
-                                <div class="timeline-company">
-                                    <span>🏢 ${escapeHTML(item.company || '')}</span>
+                                <div class="timeline-company" style="margin-top: 10px;">
                                     ${item.duration ? `<span class="duration">📅 ${escapeHTML(item.duration)}</span>` : ''}
+                                    ${locationText ? `<span class="duration" style="background: rgba(255,255,255,0.04); font-size: 11px;">${escapeHTML(locationText)}</span>` : ''}
                                 </div>
-                                <div class="timeline-desc">${escapeHTML(item.desc || item.description || '')}</div>
-                                ${highlightsHtml}
+                                ${item.desc ? `<div class="timeline-desc">${escapeHTML(item.desc)}</div>` : ''}
+                                ${responsibilitiesHtml}
+                                ${tagsHtml}
                             </div>
                         </div>
                     `;
@@ -143,6 +170,9 @@
             gridEl.outerHTML = timelineHtml;
         } else {
             const wrapper = expSection.querySelector('.content-wrapper');
+            if (wrapper) wrapper.insertAdjacentHTML('beforeend', timelineHtml);
+        }
+    }
             if (wrapper) wrapper.insertAdjacentHTML('beforeend', timelineHtml);
         }
     }

@@ -143,11 +143,22 @@ if (expCount.c === 0) {
     const ins = db.prepare('INSERT INTO experience (role, company, duration, responsibilities, skills, is_current, sort_order) VALUES (?,?,?,?,?,?,?)');
     [
         [
-            'Jr. Software Engineer (SQA)',
-            'Daffodil Software Ltd.',
-            '2022 – Present',
-            JSON.stringify(['Conducting functional, security, and performance testing on 50+ enterprise systems', 'Writing and executing test cases for ERP systems, SaaS platforms', 'Coordinating UAT sessions with clients and stakeholders', 'Managing QA documentation including test plans and bug reports', 'Participating in sprint planning and Agile ceremonies']),
-            JSON.stringify(['Selenium', 'Cypress', 'JMeter', 'Jira', 'Postman', 'BrowserStack']),
+            'Software Engineer',
+            'Daffodil Software Ltd. (DSL)',
+            'Jul 2026 – Present · Full-time (3 yrs 7 mos total)',
+            JSON.stringify([
+                'Lead Quality Engineering, test strategy, and software quality initiatives across multiple commercial and enterprise applications.',
+                'Design, develop, and maintain automated testing solutions using Cypress and execute performance testing with JMeter.',
+                'Plan and execute Functional, API, Regression, Integration, UAT, and Performance Testing throughout the SDLC.',
+                'Establish and manage Quality Engineering operations for internal and external clients, supporting the Software Testing as a Service (STaaS) initiative.',
+                'Implement AI-assisted testing workflows and process improvements, reducing manual testing effort by approximately 40% and accelerating release cycles.',
+                'Collaborate with cross-functional teams, Product Owners, and engineering stakeholders to deliver high-quality software in Agile Scrum environments.',
+                'Facilitate Scrum ceremonies, sprint planning, defect triage, release validation, and cross-team coordination.',
+                'Mentor QA team members and testing interns, promoting engineering best practices and continuous learning.',
+                'Work closely with the CTO on technical planning, project execution, reporting, documentation, and operational coordination.',
+                'Contribute to the successful delivery and quality assurance of 8+ commercial products and software solutions supporting 34 Daffodil Group concerns.'
+            ]),
+            'Cypress, JMeter, Jira, REST API Testing, AI-Assisted Testing, Agile Scrum, SDLC, STLC, Git',
             1, 0
         ],
         [
