@@ -83,11 +83,6 @@
             </div>
         </header>
 
-        <div class="social-links interactive">
-            <a href="https://linkedin.com/in/abirhassan" target="_blank" rel="noopener">LINKEDIN</a>
-            <a href="https://github.com/abir-software" target="_blank" rel="noopener">GITHUB</a>
-        </div>
-
         <footer class="interactive">
             <div class="footer-left">
                 <span>© 2026 Md Abir Hassan. All rights reserved.</span>
