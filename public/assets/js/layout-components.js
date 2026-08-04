@@ -167,7 +167,7 @@
     }
 
     function initCustomGlassCursor() {
-        if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 768) {
+        if (window.innerWidth <= 768) {
             return;
         }
 
@@ -175,7 +175,7 @@
         if (!cursorEl) {
             cursorEl = document.createElement('div');
             cursorEl.id = 'custom-glass-cursor';
-            cursorEl.className = 'custom-glass-cursor';
+            cursorEl.className = 'custom-glass-cursor active';
             cursorEl.innerHTML = `
                 <div class="cursor-glow-ring"></div>
                 <div class="cursor-shadow-pod"></div>
@@ -205,18 +205,16 @@
                 </div>
             `;
             document.body.appendChild(cursorEl);
+            document.body.classList.add('has-custom-cursor');
         }
 
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
-        let cursorX = mouseX;
-        let cursorY = mouseY;
         let prevMouseX = mouseX;
         let prevMouseY = mouseY;
-        let currentRotation = 0;
         let isHovered = false;
         let isClicked = false;
-        let isVisible = false;
+        let isVisible = true;
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
