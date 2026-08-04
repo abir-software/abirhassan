@@ -83,21 +83,68 @@
         }
     }
 
-    // ─── 3. POPULATE EXPERIENCE ─────────────────────────────
+    // ─── 3. POPULATE EXPERIENCE TIMELINE ────────────────────
     async function loadExperienceData() {
         const data = await fetchAPI('/experience');
         if (!data || !Array.isArray(data) || data.length === 0) return;
 
-        const expGridEl = document.querySelector('.section.experience .grid');
-        if (!expGridEl) return;
+        const expSection = document.querySelector('.section.experience');
+        if (!expSection) return;
 
-        expGridEl.innerHTML = data.map(item => `
-            <div class="card">
-                <div class="card-title">${escapeHTML(item.role || item.title || '')}</div>
-                <div class="card-subtitle">${escapeHTML(item.company || '')} ${item.duration ? `| ${escapeHTML(item.duration)}` : ''}</div>
-                <div class="card-text">${escapeHTML(item.desc || item.description || '')}</div>
+        const gridEl = expSection.querySelector('.grid');
+        const timelineHtml = `
+            <div class="career-timeline">
+                ${data.map((item, idx) => {
+                    const badge = idx === 0 ? 'PRESENT ROLE' : (item.duration || 'MILESTONE');
+                    let highlightsHtml = '';
+                    if (item.highlights) {
+                        try {
+                            const arr = typeof item.highlights === 'string' ? JSON.parse(item.highlights) : item.highlights;
+                            if (Array.isArray(arr) && arr.length > 0) {
+                                highlightsHtml = `
+                                    <div class="timeline-highlights">
+                                        ${arr.map(h => `<div class="timeline-highlight-item">${escapeHTML(h)}</div>`).join('')}
+                                    </div>
+                                `;
+                            }
+                        } catch (e) {
+                            if (typeof item.highlights === 'string') {
+                                highlightsHtml = `
+                                    <div class="timeline-highlights">
+                                        <div class="timeline-highlight-item">${escapeHTML(item.highlights)}</div>
+                                    </div>
+                                `;
+                            }
+                        }
+                    }
+
+                    return `
+                        <div class="timeline-item">
+                            <div class="timeline-node"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h3 class="timeline-title">${escapeHTML(item.role || item.title || '')}</h3>
+                                    <span class="timeline-badge">${escapeHTML(badge)}</span>
+                                </div>
+                                <div class="timeline-company">
+                                    <span>🏢 ${escapeHTML(item.company || '')}</span>
+                                    ${item.duration ? `<span class="duration">📅 ${escapeHTML(item.duration)}</span>` : ''}
+                                </div>
+                                <div class="timeline-desc">${escapeHTML(item.desc || item.description || '')}</div>
+                                ${highlightsHtml}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
             </div>
-        `).join('');
+        `;
+
+        if (gridEl) {
+            gridEl.outerHTML = timelineHtml;
+        } else {
+            const wrapper = expSection.querySelector('.content-wrapper');
+            if (wrapper) wrapper.insertAdjacentHTML('beforeend', timelineHtml);
+        }
     }
 
     // ─── 4. POPULATE FEATURED PROJECTS ──────────────────────
