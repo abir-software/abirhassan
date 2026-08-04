@@ -1,5 +1,5 @@
 // =========================================================
-// LAYOUT COMPONENTS — Universal Top Fixed Navbar & Footer
+// LAYOUT COMPONENTS — Universal Top Transparent Navbar & Footer
 // =========================================================
 
 (function () {
@@ -83,14 +83,34 @@
             </div>
         </header>
 
-        <footer class="interactive">
-            <div class="footer-left">
-                <span>© 2026 Md Abir Hassan. All rights reserved.</span>
+        <footer class="transparent-footer interactive">
+            <div class="footer-col brand-col">
+                <a href="index.html" class="footer-logo">A<span class="logo-x">H</span></a>
+                <p class="footer-desc">Jr. Software Engineer (SQA) & Project Manager bridging technical excellence with operational efficiency.</p>
+                <div class="footer-copy">© 2026 Md Abir Hassan. All rights reserved.</div>
             </div>
-            <div class="footer-right">
-                <a href="https://linkedin.com/in/abirhassan" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub</a>
-                <a href="contact.html">Contact</a>
+
+            <div class="footer-col info-col">
+                <div class="footer-heading">CONTACT & LOCATION</div>
+                <div class="footer-info-item">📍 Dhaka, Bangladesh</div>
+                <div class="footer-info-item">📧 mdabirhassan2@gmail.com</div>
+                <div class="footer-info-item">🏢 Daffodil Software Ltd.</div>
+            </div>
+
+            <div class="footer-col links-col">
+                <div class="footer-heading">QUICK LINKS</div>
+                <div class="footer-links-grid">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="experience.html">Experience</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://linkedin.com/in/abirhassan" target="_blank" rel="noopener">LinkedIn ↗</a>
+                    <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub ↗</a>
+                </div>
             </div>
         </footer>
         `;
