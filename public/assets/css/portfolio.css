@@ -798,18 +798,37 @@ footer.transparent-footer {
 /* ─── 2. Tablets & Laptops (601px - 960px) ──────────────────────────────── */
 @media (max-width: 960px) {
   header.top-navbar {
-    padding: 14px 4vw;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 18px;
+    background: rgba(10, 12, 20, 0.75) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
-  
+
   .top-nav-links {
-    max-width: 55vw;
+    position: relative;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    order: 3;
     overflow-x: auto;
     white-space: nowrap;
     flex-wrap: nowrap;
-    gap: 16px;
-    padding-bottom: 4px;
+    gap: 6px;
+    padding: 4px 6px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     scrollbar-width: none;
     -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
   }
   
   .top-nav-links::-webkit-scrollbar {
@@ -819,6 +838,8 @@ footer.transparent-footer {
   .top-nav-links a {
     font-size: 11px;
     letter-spacing: 1.2px;
+    padding: 6px 14px;
+    border-radius: 18px;
   }
 
   .content-wrapper {
@@ -833,44 +854,34 @@ footer.transparent-footer {
 /* ─── 3. Mobile Phones (< 600px) ────────────────────────────────────────── */
 @media (max-width: 600px) {
   header.top-navbar {
-    padding: 12px 16px;
+    padding: 10px 14px;
+    gap: 8px;
   }
 
   .logo {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .yesex-logo {
-    font-size: 11px;
-    padding: 4px 10px;
+    font-size: 10px;
+    padding: 4px 12px;
     letter-spacing: 1.5px;
   }
 
   .top-nav-links {
-    max-width: 55vw;
-    gap: 6px;
-    padding: 2px 0;
-    overflow-x: auto;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .top-nav-links::-webkit-scrollbar {
-    display: none;
+    gap: 4px;
+    padding: 3px 5px;
   }
 
   .top-nav-links a {
     font-size: 10px;
-    letter-spacing: 1px;
-    padding: 5px 12px;
-    border-radius: 16px;
+    letter-spacing: 0.8px;
+    padding: 5px 11px;
+    border-radius: 14px;
   }
 
   .section {
-    padding: 100px 18px 50px !important;
+    padding: 125px 16px 40px !important;
     text-align: left !important;
     align-items: flex-start !important;
   }
