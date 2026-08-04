@@ -68,7 +68,7 @@
         const desktopNavHtml = buildDesktopNavHtml(navItems, currentPage);
         const mobileNavHtml = buildMobileOverlayLinksHtml(navItems, currentPage);
 
-        // 1. Render Header & Mobile Drawer in #fixed-ui
+        // 1. Render Single Header & Mobile Drawer in #fixed-ui
         if (fixedContainer) {
             fixedContainer.innerHTML = `
             <header class="top-navbar interactive">
@@ -89,13 +89,6 @@
                     </button>
                 </div>
             </header>
-
-            <!-- Compact Sub-Nav Strip for Mobile Swipe -->
-            <div class="mobile-strip-bar interactive">
-                <nav class="mobile-nav-scroll">
-                    ${desktopNavHtml}
-                </nav>
-            </div>
 
             <!-- Fullscreen Glass Overlay Drawer for Mobile -->
             <div class="mobile-glass-overlay" id="mobile-glass-overlay">
@@ -183,6 +176,11 @@
         toggleBtn.addEventListener('click', openOverlay);
         if (closeBtn) closeBtn.addEventListener('click', closeOverlay);
 
+        // Close when clicking any nav link inside overlay
+        overlay.querySelectorAll('.overlay-nav-grid a').forEach(link => {
+            link.addEventListener('click', closeOverlay);
+        });
+
         // Close on escape key
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && overlay.classList.contains('open')) {
@@ -197,7 +195,6 @@
             if (!res.ok) return;
             const data = await res.json();
             if (Array.isArray(data) && data.length > 0) {
-                // Merge icons
                 const merged = data.map(item => {
                     const found = DEFAULT_NAV.find(d => d.url === item.url);
                     return { ...item, icon: found ? found.icon : '✦' };
