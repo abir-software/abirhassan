@@ -213,28 +213,8 @@
         let isHovered = false;
         let isClicked = false;
         let isVisible = true;
-        let lastWaveTime = 0;
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        function createWaterWaveRipple(x, y) {
-            if (prefersReducedMotion) return;
-            const now = Date.now();
-            if (now - lastWaveTime < 45) return; // Throttle 45ms for 60FPS fluid motion
-            lastWaveTime = now;
-
-            const wave = document.createElement('div');
-            wave.className = 'water-wave-ripple';
-            wave.style.left = `${x}px`;
-            wave.style.top = `${y}px`;
-            document.body.appendChild(wave);
-
-            setTimeout(() => {
-                if (wave && wave.parentNode) {
-                    wave.parentNode.removeChild(wave);
-                }
-            }, 850);
-        }
 
         window.addEventListener('mousemove', e => {
             mouseX = e.clientX;
@@ -243,7 +223,6 @@
                 isVisible = true;
                 cursorEl.classList.add('active');
             }
-            createWaterWaveRipple(mouseX, mouseY);
         });
 
         document.addEventListener('mouseleave', () => {
