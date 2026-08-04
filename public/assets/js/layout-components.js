@@ -105,9 +105,10 @@
                     <div class="social-pills" style="flex-wrap: wrap;">
                         <a href="https://www.linkedin.com/in/abirhassan2/" target="_blank" rel="noopener">LinkedIn ↗</a>
                         <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub ↗</a>
-                        <a href="https://wa.me/8801700000000" target="_blank" rel="noopener">WhatsApp ↗</a>
-                        <a href="https://facebook.com/abirhassan" target="_blank" rel="noopener">Facebook ↗</a>
-                        <a href="https://x.com/abirhassan" target="_blank" rel="noopener">X ↗</a>
+                        <a href="https://api.whatsapp.com/send/?phone=01950191090&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp ↗</a>
+                        <a href="https://www.facebook.com/aabirhassan2" target="_blank" rel="noopener">Facebook ↗</a>
+                        <a href="https://www.instagram.com/abir_hassan_2/" target="_blank" rel="noopener">Instagram ↗</a>
+                        <a href="https://x.com/mdabirhassan3" target="_blank" rel="noopener">X ↗</a>
                     </div>
                 </div>
             </div>
@@ -131,7 +132,7 @@
                     <a href="index.html" class="footer-logo">A<span class="logo-x">H</span></a>
                     <p class="footer-desc">Software Engineer & Project Manager bridging technical excellence with operational efficiency.</p>
                     
-                    <!-- Mini Contact Icons for Email, LinkedIn, Facebook, WhatsApp -->
+                    <!-- Mini Contact Icons for Email, LinkedIn, Facebook, WhatsApp, Instagram -->
                     <div class="footer-mini-contact-bar">
                         <a href="mailto:mdabirhassan2@gmail.com" class="mini-contact-icon interactive" aria-label="Email">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="#00E5FF"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -139,10 +140,10 @@
                         <a href="https://www.linkedin.com/in/abirhassan2/" target="_blank" rel="noopener" class="mini-contact-icon interactive" aria-label="LinkedIn">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="#00E5FF"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                         </a>
-                        <a href="https://facebook.com/abirhassan" target="_blank" rel="noopener" class="mini-contact-icon interactive" aria-label="Facebook">
+                        <a href="https://www.facebook.com/aabirhassan2" target="_blank" rel="noopener" class="mini-contact-icon interactive" aria-label="Facebook">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="#00E5FF"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.5C10 7.01 11.49 5.65 13.75 5.65c1.08 0 2.22.19 2.22.19v2.44h-1.25c-1.23 0-1.62.77-1.62 1.56V12h2.77l-.44 3h-2.33v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
                         </a>
-                        <a href="https://wa.me/8801700000000" target="_blank" rel="noopener" class="mini-contact-icon interactive" aria-label="WhatsApp">
+                        <a href="https://api.whatsapp.com/send/?phone=01950191090&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="mini-contact-icon interactive" aria-label="WhatsApp">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="#00E5FF"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c4.55 0 8.24 3.69 8.24 8.24 0 2.2-.86 4.27-2.42 5.82a8.19 8.19 0 0 1-5.82 2.42c-1.48 0-2.94-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.216 8.216 0 0 1-1.26-4.38c0-4.55 3.7-8.24 8.25-8.24M8.53 7.33c-.2 0-.44.07-.67.33-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.28 3.79.6.26 1.06.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.11-.23-.17-.48-.3-.25-.12-1.48-.73-1.71-.81-.23-.09-.4-.12-.57.12-.17.24-.67.81-.82.98-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.24-.4.08-.17.04-.31-.02-.44-.06-.12-.57-1.37-.78-1.87-.2-.5-.41-.43-.57-.44z"/></svg>
                         </a>
                     </div>
@@ -170,9 +171,10 @@
                     <div class="footer-socials" style="flex-wrap: wrap; gap: 8px;">
                         <a href="https://www.linkedin.com/in/abirhassan2/" target="_blank" rel="noopener">LinkedIn ↗</a>
                         <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub ↗</a>
-                        <a href="https://wa.me/8801700000000" target="_blank" rel="noopener">WhatsApp ↗</a>
-                        <a href="https://facebook.com/abirhassan" target="_blank" rel="noopener">Facebook ↗</a>
-                        <a href="https://x.com/abirhassan" target="_blank" rel="noopener">X ↗</a>
+                        <a href="https://api.whatsapp.com/send/?phone=01950191090&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp ↗</a>
+                        <a href="https://www.facebook.com/aabirhassan2" target="_blank" rel="noopener">Facebook ↗</a>
+                        <a href="https://www.instagram.com/abir_hassan_2/" target="_blank" rel="noopener">Instagram ↗</a>
+                        <a href="https://x.com/mdabirhassan3" target="_blank" rel="noopener">X ↗</a>
                     </div>
                 </div>
             `;

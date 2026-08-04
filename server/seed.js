@@ -268,22 +268,24 @@ const settingsCount = db.prepare('SELECT COUNT(*) as c FROM settings').get();
 if (settingsCount.c === 0) {
     const ins = db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?,?)');
     [
-        ['primary_color', '#6c63ff'],
-        ['secondary_color', '#f50057'],
-        ['accent_color', '#00f5ff'],
+        ['primary_color', '#00E5FF'],
+        ['secondary_color', '#3B82F6'],
+        ['accent_color', '#8B5CF6'],
         ['font_family', 'Inter'],
         ['dark_mode', 'true'],
         ['site_title', 'Md Abir Hassan — Portfolio'],
-        ['site_tagline', 'SQA Engineer | Project Manager | Web Developer'],
-        ['email', 'abirhassan@example.com'],
-        ['phone', '+880 1XXX-XXXXXX'],
+        ['site_tagline', 'Software Engineer | QA Specialist | Project Manager'],
+        ['email', 'mdabirhassan2@gmail.com'],
+        ['phone', '+880 1950-191090'],
         ['location', 'Dhaka, Bangladesh'],
         ['linkedin', 'https://www.linkedin.com/in/abirhassan2/'],
-        ['github', 'https://github.com/abirhassan'],
-        ['twitter', ''],
-        ['facebook', ''],
+        ['github', 'https://github.com/abir-software'],
+        ['whatsapp', 'https://api.whatsapp.com/send/?phone=01950191090&text&type=phone_number&app_absent=0'],
+        ['facebook', 'https://www.facebook.com/aabirhassan2'],
+        ['instagram', 'https://www.instagram.com/abir_hassan_2/'],
+        ['twitter', 'https://x.com/mdabirhassan3'],
         ['cv_url', ''],
-        ['footer_text', '© 2024 Md Abir Hassan. All rights reserved.'],
+        ['footer_text', '© 2026 Md Abir Hassan. All rights reserved. Developed by Md Abir Hassan'],
     ].forEach(r => ins.run(...r));
     console.log('✅ Settings seeded');
 }
