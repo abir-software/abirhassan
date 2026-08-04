@@ -28,6 +28,7 @@ export default defineConfig({
         blog: resolve(__dirname, 'blog.html'),
         blogdetail: resolve(__dirname, 'blog-detail.html'),
         contact: resolve(__dirname, 'contact.html'),
+        admin: resolve(__dirname, 'admin/index.html'),
       },
     },
   },
