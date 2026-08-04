@@ -178,7 +178,6 @@
             cursorEl.className = 'custom-glass-cursor active';
             cursorEl.innerHTML = `
                 <div class="cursor-glow-ring"></div>
-                <div class="cursor-shadow-pod"></div>
                 <div class="cursor-pointer-wrap">
                     <svg class="cursor-arrow-svg" viewBox="0 0 36 36" width="36" height="36">
                         <defs>
@@ -196,7 +195,6 @@
                                 <stop offset="100%" stop-color="rgba(255, 255, 255, 0.05)" />
                             </linearGradient>
                         </defs>
-                        <path class="svg-cursor-shadow" d="M 4 4 L 4 27 L 11 20 L 15 29 L 19 27 L 15 18 L 23 18 Z" />
                         <path class="svg-cursor-rainbow" d="M 4 4 L 4 27 L 11 20 L 15 29 L 19 27 L 15 18 L 23 18 Z" />
                         <path class="svg-cursor-glass-body" d="M 5 6 L 5 25 L 11 19 L 15 27 L 17 26 L 14 18 L 21 18 Z" />
                         <path class="svg-cursor-specular" d="M 5 6 L 5 24 L 10 19 Z" />
@@ -215,8 +213,28 @@
         let isHovered = false;
         let isClicked = false;
         let isVisible = true;
+        let lastWaveTime = 0;
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function createWaterWaveRipple(x, y) {
+            if (prefersReducedMotion) return;
+            const now = Date.now();
+            if (now - lastWaveTime < 45) return; // Throttle 45ms for 60FPS fluid motion
+            lastWaveTime = now;
+
+            const wave = document.createElement('div');
+            wave.className = 'water-wave-ripple';
+            wave.style.left = `${x}px`;
+            wave.style.top = `${y}px`;
+            document.body.appendChild(wave);
+
+            setTimeout(() => {
+                if (wave && wave.parentNode) {
+                    wave.parentNode.removeChild(wave);
+                }
+            }, 850);
+        }
 
         window.addEventListener('mousemove', e => {
             mouseX = e.clientX;
@@ -225,6 +243,7 @@
                 isVisible = true;
                 cursorEl.classList.add('active');
             }
+            createWaterWaveRipple(mouseX, mouseY);
         });
 
         document.addEventListener('mouseleave', () => {
