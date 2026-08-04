@@ -1022,7 +1022,7 @@ footer.transparent-footer {
   display: none;
 }
 
-/* Fullscreen Glass Overlay Drawer */
+/* Fullscreen Ultra-Transparent Glass Overlay Drawer */
 .mobile-glass-overlay {
   position: fixed;
   top: 0;
@@ -1030,13 +1030,14 @@ footer.transparent-footer {
   width: 100vw;
   height: 100vh;
   z-index: 3000;
-  background: rgba(10, 12, 22, 0.95);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(10, 12, 24, 0.45) !important;
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 30px 24px;
+  padding: 35px 24px;
   box-sizing: border-box;
   opacity: 0;
   pointer-events: none;
@@ -1059,29 +1060,32 @@ footer.transparent-footer {
 
 .overlay-close-btn {
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  font-size: 24px;
+  font-size: 26px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .overlay-close-btn:hover {
-  background: rgba(245, 0, 87, 0.2);
+  background: rgba(245, 0, 87, 0.25);
   border-color: #f50057;
   color: #f50057;
+  transform: rotate(90deg);
+  box-shadow: 0 0 20px rgba(245, 0, 87, 0.3);
 }
 
 .overlay-nav-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 14px;
   margin: 30px 0;
   overflow-y: auto;
   max-height: 65vh;
@@ -1092,30 +1096,46 @@ footer.transparent-footer {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  color: rgba(255, 255, 255, 0.85);
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-family: 'Outfit', sans-serif;
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .overlay-nav-grid a .nav-icon {
-  font-size: 18px;
+  font-size: 20px;
+  transition: transform 0.3s ease;
 }
 
-.overlay-nav-grid a:hover,
-.overlay-nav-grid a.active {
-  background: rgba(0, 229, 255, 0.12);
-  border-color: rgba(0, 229, 255, 0.35);
+.overlay-nav-grid a:hover {
+  background: rgba(0, 229, 255, 0.14);
+  border-color: rgba(0, 229, 255, 0.4);
   color: var(--accent);
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 229, 255, 0.25);
+}
+
+.overlay-nav-grid a:hover .nav-icon {
+  transform: scale(1.2);
+}
+
+.overlay-nav-grid a.active {
+  background: rgba(0, 229, 255, 0.18);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.3);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
 .overlay-footer {
