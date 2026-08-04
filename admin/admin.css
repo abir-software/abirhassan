@@ -4,25 +4,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --bg-primary: #0a0a1a;
-  --bg-secondary: #12122a;
-  --bg-card: #1a1a30;
-  --bg-hover: #22224a;
-  --border: rgba(255,255,255,0.08);
-  --border-active: rgba(108,99,255,0.5);
-  --accent: #6c63ff;
-  --accent-2: #f50057;
-  --accent-3: #00f5ff;
-  --text-primary: #f0f0ff;
-  --text-secondary: #8888aa;
-  --text-muted: #555577;
-  --success: #00d4aa;
-  --warning: #f5a623;
-  --danger: #ff4757;
-  --sidebar-w: 260px;
-  --header-h: 64px;
+  --bg-primary: #070913;
+  --bg-secondary: #0d1126;
+  --bg-card: #131836;
+  --bg-hover: #1c234a;
+  --border: rgba(0, 229, 255, 0.15);
+  --border-active: rgba(0, 229, 255, 0.6);
+  --accent: #00E5FF;
+  --accent-2: #3B82F6;
+  --accent-3: #8B5CF6;
+  --text-primary: #ffffff;
+  --text-secondary: #a0aec0;
+  --text-muted: #64748b;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --sidebar-w: 270px;
+  --header-h: 68px;
   --radius: 12px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
