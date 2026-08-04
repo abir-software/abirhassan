@@ -10,16 +10,19 @@ const router = Router();
 
 // POST /api/auth/login
 router.post('/login', (req, res) => {
-    const { username, password } = req.body;
+    const { username, password } = req.body || {};
     if (!username || !password) {
         return res.status(400).json({ error: 'Username and password required' });
     }
-    const user = db.prepare('SELECT * FROM users WHERE username = ?').get(username);
+    const cleanUsername = username.trim().toLowerCase();
+    const user = db.prepare('SELECT * FROM users WHERE LOWER(username) = ?').get(cleanUsername);
     if (!user || !bcrypt.compareSync(password, user.password_hash)) {
-        return res.status(401).json({ error: 'Invalid credentials' });
+        return res.status(401).json({ error: 'Invalid username or password' });
     }
     const token = generateToken({ id: user.id, username: user.username, role: user.role });
-    db.prepare(`INSERT INTO activity_log (action, details) VALUES (?,?)`).run('login', `User ${username} logged in`);
+    try {
+        db.prepare(`INSERT INTO activity_log (action, details) VALUES (?,?)`).run('login', `User ${user.username} logged in`);
+    } catch (e) {}
     res.json({ token, user: { id: user.id, username: user.username, role: user.role } });
 });
 

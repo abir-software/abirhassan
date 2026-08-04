@@ -35,7 +35,7 @@ if (!existsSync(uploadsDir)) mkdirSync(uploadsDir, { recursive: true });
 
 // ─── Middleware ──────────────────────────────────────────
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:5173'],
+    origin: true,
     credentials: true,
 }));
 app.use(express.json({ limit: '20mb' }));

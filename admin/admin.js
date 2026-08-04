@@ -2,7 +2,9 @@
 // ADMIN.JS — Full SPA Logic
 // =========================================================
 
-const API = window.location.hostname === 'localhost' && window.location.port === '5173' ? 'http://localhost:3000/api' : '/api';
+const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port === '5173'
+    ? 'http://localhost:3000/api'
+    : '/api';
 let TOKEN = localStorage.getItem('cms_token') || '';
 let QUILL = null;
 let currentProjectFilter = 'all';
@@ -55,9 +57,24 @@ function formatSize(bytes) {
 // ─────────────────────────────────────────────────────────
 // AUTH
 // ─────────────────────────────────────────────────────────
-async function doLogin() {
-    const username = document.getElementById('login-username').value.trim();
-    const password = document.getElementById('login-password').value;
+async function doLogin(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const uEl = document.getElementById('login-username');
+    const pEl = document.getElementById('login-password');
+    const errEl = document.getElementById('login-error');
+    if (errEl) errEl.style.display = 'none';
+
+    const username = uEl ? uEl.value.trim() : '';
+    const password = pEl ? pEl.value : '';
+
+    if (!username || !password) {
+        if (errEl) {
+            errEl.textContent = 'Please enter both username and password';
+            errEl.style.display = 'block';
+        }
+        return;
+    }
+
     try {
         const data = await req('POST', '/auth/login', { username, password });
         TOKEN = data.token;
@@ -65,8 +82,12 @@ async function doLogin() {
         document.getElementById('user-display').textContent = data.user.username;
         document.getElementById('user-avatar').textContent = data.user.username[0].toUpperCase();
         showApp();
-    } catch {
-        document.getElementById('login-error').style.display = 'block';
+    } catch (err) {
+        console.error('Login Error:', err);
+        if (errEl) {
+            errEl.textContent = err.message || 'Invalid username or password';
+            errEl.style.display = 'block';
+        }
     }
 }
 

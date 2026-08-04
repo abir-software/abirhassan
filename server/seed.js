@@ -6,12 +6,15 @@ import db from './db.js';
 
 console.log('🌱 Seeding database...');
 
-// ─── Admin User ──────────────────────────────────────────
-const existingUser = db.prepare('SELECT id FROM users WHERE username = ?').get('abirhassan2');
-if (!existingUser) {
-    const hash = bcrypt.hashSync('8146', 10);
-    db.prepare('INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)').run('abirhassan2', hash, 'admin');
-    console.log('✅ Admin user created: abirhassan2');
+// ─── Admin Users ─────────────────────────────────────────
+const defaultUsers = ['admin', 'abir', 'abirhassan', 'abirhassan2'];
+const adminHash = bcrypt.hashSync('8146', 10);
+for (const uname of defaultUsers) {
+    const existing = db.prepare('SELECT id FROM users WHERE LOWER(username) = ?').get(uname);
+    if (!existing) {
+        db.prepare('INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)').run(uname, adminHash, 'admin');
+        console.log(`✅ Admin user created: ${uname}`);
+    }
 }
 
 // ─── Hero ────────────────────────────────────────────────
