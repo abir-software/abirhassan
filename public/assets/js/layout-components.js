@@ -103,7 +103,7 @@
 
                 <div class="overlay-footer">
                     <div class="social-pills" style="flex-wrap: wrap;">
-                        <a href="https://linkedin.com/in/abirhassan" target="_blank" rel="noopener">LinkedIn ↗</a>
+                        <a href="https://www.linkedin.com/in/abirhassan2/" target="_blank" rel="noopener">LinkedIn ↗</a>
                         <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub ↗</a>
                         <a href="https://wa.me/8801700000000" target="_blank" rel="noopener">WhatsApp ↗</a>
                         <a href="https://facebook.com/abirhassan" target="_blank" rel="noopener">Facebook ↗</a>
@@ -130,7 +130,7 @@
                 <div class="footer-col brand-col">
                     <a href="index.html" class="footer-logo">A<span class="logo-x">H</span></a>
                     <p class="footer-desc">Software Engineer & Project Manager bridging technical excellence with operational efficiency.</p>
-                    <div class="footer-copy">© 2026 Md Abir Hassan. All rights reserved.</div>
+                    <div class="footer-copy">© 2026 Md Abir Hassan. All rights reserved. <br><span style="color: var(--accent); font-weight: 600;">Developed by Md Abir Hassan</span></div>
                 </div>
 
                 <div class="footer-col info-col">
@@ -151,7 +151,7 @@
                         <a href="contact.html">Contact</a>
                     </div>
                     <div class="footer-socials" style="flex-wrap: wrap; gap: 8px;">
-                        <a href="https://linkedin.com/in/abirhassan" target="_blank" rel="noopener">LinkedIn ↗</a>
+                        <a href="https://www.linkedin.com/in/abirhassan2/" target="_blank" rel="noopener">LinkedIn ↗</a>
                         <a href="https://github.com/abir-software" target="_blank" rel="noopener">GitHub ↗</a>
                         <a href="https://wa.me/8801700000000" target="_blank" rel="noopener">WhatsApp ↗</a>
                         <a href="https://facebook.com/abirhassan" target="_blank" rel="noopener">Facebook ↗</a>

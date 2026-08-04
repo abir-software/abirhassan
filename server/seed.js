@@ -275,7 +275,7 @@ if (settingsCount.c === 0) {
         ['email', 'abirhassan@example.com'],
         ['phone', '+880 1XXX-XXXXXX'],
         ['location', 'Dhaka, Bangladesh'],
-        ['linkedin', 'https://linkedin.com/in/abirhassan'],
+        ['linkedin', 'https://www.linkedin.com/in/abirhassan2/'],
         ['github', 'https://github.com/abirhassan'],
         ['twitter', ''],
         ['facebook', ''],
