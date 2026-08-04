@@ -27,6 +27,7 @@ canvas#animationCanvas {
   width: 100vw;
   height: 100vh;
   z-index: 1;
+  filter: brightness(1.08) contrast(1.04) hue-rotate(-8deg);
 }
 
 .overlay {
@@ -35,7 +36,7 @@ canvas#animationCanvas {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(circle at 50% 50%, rgba(6, 10, 20, 0.25) 0%, rgba(2, 4, 10, 0.65) 100%) !important;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.05) 0%, rgba(4, 8, 18, 0.35) 100%) !important;
   z-index: 2;
   pointer-events: none;
 }
