@@ -145,7 +145,7 @@ if (expCount.c === 0) {
         [
             'Software Engineer',
             'Daffodil Software Ltd. (DSL)',
-            'Jul 2026 – Present · Full-time (3 yrs 7 mos total)',
+            'Jul 2026 - Present · 2 mos (Full-time · 3 yrs 7 mos total)',
             JSON.stringify([
                 'Lead Quality Engineering, test strategy, and software quality initiatives across multiple commercial and enterprise applications.',
                 'Design, develop, and maintain automated testing solutions using Cypress and execute performance testing with JMeter.',
@@ -162,21 +162,43 @@ if (expCount.c === 0) {
             1, 0
         ],
         [
-            'Project Manager & Documentation Specialist',
-            'Daffodil Software Ltd.',
-            '2021 – 2022',
-            JSON.stringify(['Managing software project lifecycles end-to-end', 'Creating SRS, BRS, WBS, and project charter documents', 'Stakeholder communication and requirement gathering', 'ISO compliance documentation and internal audits']),
-            JSON.stringify(['Project Planning', 'MS Project', 'Agile', 'JIRA', 'Confluence']),
+            'Software Engineer (Jr)',
+            'Daffodil Software Ltd. (DSL)',
+            'Feb 2024 - Jul 2026 · 2 yrs 6 mos',
+            JSON.stringify([
+                'Test Execution & Automation: Conduct functional, performance, and security testing for commercial and non-commercial projects using JMeter, Cypress, and Jira.',
+                'Defect Tracking & Quality Assurance: Identify, report, and track defects using Jira/Bugzilla, ensuring timely resolution and adherence to quality standards.',
+                'Process Optimization & Documentation: Improve testing workflows, manage test cases, and maintain detailed project documentation for seamless software delivery.'
+            ]),
+            'JMeter, Cypress, Jira, Bugzilla, Test Automation, QA Process, SDLC',
             0, 1
         ],
         [
-            'Corporate Administrator',
-            'Daffodil International Group',
-            '2019 – 2021',
-            JSON.stringify(['Running day-to-day administrative operations', 'ISO documentation management and compliance auditing', 'Cross-department coordination and HR support', 'Event management and corporate reporting']),
-            JSON.stringify(['ISO Standards', 'MS Office 365', 'Administration', 'Compliance']),
+            'Asst. Administrative Officer',
+            'Daffodil Software Ltd. (Under Corporate Office)',
+            'Feb 2023 - Jan 2024 · 1 yr',
+            JSON.stringify([
+                'Project Coordination & System Documentation: Coordinate internal tasks, track progress, optimize website content, software testing, and ensure adherence to standards.',
+                'Documentation & Marketing: Develop KnowSystem documentation and implement marketing strategies with standards considerations.',
+                'Operations & Administration: Prepare internal quotations, monitor internal revenue, manage administrative tasks, and ensure compliance.',
+                'AI & Tech Integration: Stay updated on AI trends, collaborate with development & business teams, and ensure standards in AI implementations.'
+            ]),
+            'Project Coordination, System Documentation, AI Trends, Administration, Website QA',
             0, 2
         ],
+        [
+            'Assistant Administrative Officer (Compliance Cell)',
+            'Daffodil Group (Corporate Office)',
+            'Jun 2022 - Jan 2024 · 1 yr 8 mos',
+            JSON.stringify([
+                'Compliance Audits & Governance: Ensure regulatory adherence across 54+ subsidiaries including Daffodil International University (DIU).',
+                'Strategic Planning & Education Systems: Formulate growth strategies, develop Smart Edu modules, update DIU wiki, and draft compliance reports.',
+                'Site Visits & Administration: Visit Daffodil family concerns, manage online platforms, and maintain corporate compliance standards.',
+                'Event Operations & Leadership: Spearheaded execution of major events including Daffodil Family Day (2022 & 2023 for 54 concerns), Change Together program (2022), and DIU Convocation (2023).'
+            ]),
+            'Compliance Audits, Strategic Planning, DIU Smart Edu, Event Management, Operations',
+            0, 3
+        ]
     ].forEach(r => ins.run(...r));
     console.log('✅ Experience seeded');
 }
