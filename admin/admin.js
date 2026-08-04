@@ -2,7 +2,7 @@
 // ADMIN.JS — Full SPA Logic
 // =========================================================
 
-const API = 'http://localhost:3000/api';
+const API = window.location.hostname === 'localhost' && window.location.port === '5173' ? 'http://localhost:3000/api' : '/api';
 let TOKEN = localStorage.getItem('cms_token') || '';
 let QUILL = null;
 let currentProjectFilter = 'all';

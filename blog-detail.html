@@ -5,52 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Post - Md Abir Hassan</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/portfolio.css">
     <style>
-        body { margin: 0; background-color: #000; font-family: 'Inter', sans-serif; color: #fff; overflow-x: hidden; }
-        canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none; }
-        
-        #fixed-ui { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 20; pointer-events: none; }
-        .interactive { pointer-events: auto; }
-        
-        :root { --accent: #00E5FF; }
-
-        /* Header */
-        header { position: absolute; top: 0; left: 0; width: 100%; padding: 35px 5vw; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Outfit', sans-serif; font-size: 40px; font-weight: 900; letter-spacing: -2px; text-shadow: 0 0 20px rgba(0, 229, 255, 0.4); text-decoration: none; color: #fff; }
-        .logo-x { color: var(--accent); }
-        .right-logo { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
-        .yesex-logo { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; }
-
-        /* Socials & Footer */
-        .social-links { position: absolute; left: -80px; top: 50%; transform: translateY(-50%) rotate(-90deg); display: flex; gap: 30px; font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 3px; font-weight: 700; }
-        .social-links a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s, text-shadow 0.3s; }
-        .social-links a:hover { color: #fff; text-shadow: 0 0 10px var(--accent); }
-
-        footer { position: absolute; bottom: 0; left: 0; width: 100%; padding: 35px 5vw; box-sizing: border-box; display: flex; justify-content: space-between; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; }
-        .footer-left, .footer-right { display: flex; gap: 40px; }
-        footer a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; }
-        footer a:hover, footer a.active { color: #fff; }
-
-        /* Content Layout */
-        #scroll-content { position: relative; z-index: 10; padding-top: 150px; padding-bottom: 100px; }
-        .section { width: 100vw; box-sizing: border-box; padding: 40px 8vw; display: flex; flex-direction: column; justify-content: center; }
-        .align-left { align-items: flex-start; text-align: left; }
-        .content-wrapper { position: relative; max-width: 55vw; z-index: 2; }
-        
         .hero-title { font-family: 'DM Serif Display', serif; font-size: 60px; font-weight: 400; line-height: 1.1; color: #fff; margin-bottom: 20px; text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .post-meta { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 35px; display: flex; gap: 20px; }
-        
         .post-body { background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02)); backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.15); padding: 40px; border-radius: 12px; font-size: 16px; font-weight: 300; line-height: 1.8; color: rgba(255,255,255,0.85); margin-bottom: 30px; }
         .post-body p { margin-bottom: 20px; }
         .post-body h2, .post-body h3 { font-family: 'Outfit', sans-serif; color: #fff; margin: 30px 0 15px 0; }
         .post-body code { background: rgba(0,229,255,0.1); color: var(--accent); padding: 2px 6px; border-radius: 4px; font-family: monospace; }
-        
-        .btn { display: inline-block; padding: 12px 28px; border: 1px solid rgba(255,255,255,0.2); border-radius: 30px; background: rgba(255,255,255,0.05); color: #fff; text-decoration: none; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; backdrop-filter: blur(10px); }
-        .btn:hover { background: rgba(0, 229, 255, 0.1); border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
-
-        @media (max-width: 1024px) { .content-wrapper { max-width: 80vw; } .hero-title { font-size: 45px; } }
-        @media (max-width: 768px) { .section { padding: 40px 8vw; } .content-wrapper { max-width: 100vw; } .social-links { display: none; } footer { flex-direction: column; gap: 15px; text-align: center; } .footer-left, .footer-right { justify-content: center; } header { padding: 25px 8vw; } .hero-title { font-size: 35px; } }
     </style>
 </head>
 <body>
@@ -74,65 +36,49 @@
                 <a href="about.html">ABOUT</a>
                 <a href="experience.html">EXPERIENCE</a>
                 <a href="qa-testing.html">QA & TESTING</a>
+                <a href="pm-details.html">PM DETAILS</a>
                 <a href="projects.html">PROJECTS</a>
                 <a href="web-dev.html">WEB DEV</a>
                 <a href="blog.html" class="active">BLOG</a>
             </div>
             <div class="footer-right">
-                <a href="mailto:abirhassan@example.com">CONTACT</a>
+                <a href="contact.html">CONTACT</a>
             </div>
         </footer>
     </div>
 
     <div id="scroll-content">
-        <section class="section align-left">
+        <section class="section align-left" style="padding-top: 140px; padding-bottom: 100px;">
             <div class="content-wrapper">
-                <a href="blog.html" class="btn interactive" style="margin-bottom: 30px;">&larr; Back to Articles</a>
+                <a href="blog.html" class="btn interactive" style="margin-bottom: 35px; padding: 10px 22px;">&larr; Back to Blog</a>
                 
                 <div id="loading" style="color:var(--accent); font-family:'Outfit'; letter-spacing:2px; font-weight:700;">LOADING ARTICLE...</div>
                 
-                <article id="article-content" style="display:none">
-                    <div class="post-meta" id="post-meta">
-                        <span id="post-category">CATEGORY</span> &bull; 
+                <div id="article-content" style="display:none;">
+                    <div class="post-meta">
+                        <span id="post-category">CATEGORY</span>
                         <span id="post-reads">0 READS</span>
                     </div>
-                    <h1 class="hero-title" id="post-title">Loading...</h1>
+                    <div class="hero-title" id="post-title">Article Title</div>
                     <div class="post-body" id="post-body"></div>
-                </article>
+                </div>
             </div>
         </section>
     </div>
 
+    <script src="/assets/js/canvas-animation.js"></script>
     <script>
-        const canvas = document.getElementById('animationCanvas'); const ctx = canvas.getContext('2d');
-        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; } resizeCanvas();
-        const frameCount = 300; const images = []; const currentFrame = index => `/assets/frames/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
-        for (let i = 1; i <= frameCount; i++) { const img = new Image(); img.src = currentFrame(i); images.push(img); }
-        let targetFrame = 0; let currentFrameIndex = 0;
-        function render(frame) {
-            const img = images[frame]; if (!img || !img.complete) return;
-            const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
-            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.drawImage(img, 0, 0, img.width, img.height, (canvas.width - img.width * ratio) / 2, (canvas.height - img.height * ratio) / 2, img.width * ratio, img.height * ratio);  
-        }
-        images[0].onload = () => render(0);
-        window.addEventListener('scroll', () => { 
-            let maxS = document.documentElement.scrollHeight - window.innerHeight; if(maxS <= 0) maxS = 1;
-            targetFrame = Math.min(frameCount - 1, Math.floor(Math.max(0, Math.min(1, document.documentElement.scrollTop / maxS)) * frameCount)); 
-        });
-        function update() { currentFrameIndex += (targetFrame - currentFrameIndex) * 0.08; render(Math.round(currentFrameIndex)); requestAnimationFrame(update); }
-        requestAnimationFrame(update); window.addEventListener('resize', () => { resizeCanvas(); render(Math.round(currentFrameIndex)); });
-
-        // Article API Fetch
+        const API = '/api';
         const params = new URLSearchParams(window.location.search);
         const slug = params.get('slug');
 
         async function loadArticle() {
             if (!slug) {
-                document.getElementById('loading').innerHTML = '⚠️ No article specified.';
+                document.getElementById('loading').innerHTML = '❌ Article not found.';
                 return;
             }
             try {
-                const b = await fetch(`/api/blogs/${slug}`).then(r => r.json());
+                const b = await fetch(`${API}/blogs/${slug}`).then(r => r.json());
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('article-content').style.display = 'block';
                 

@@ -61,7 +61,11 @@ app.use('/api/testimonials', testimonialsRouter);
 
 // ─── Serve Admin Panel ───────────────────────────────────
 app.use('/admin', express.static(join(__dirname, '..', 'admin')));
+<<<<<<< HEAD
 app.get('/admin/*splat', (req, res) => {
+=======
+app.get(/^\/admin\/.*/, (req, res) => {
+>>>>>>> 97f4252ba0c4d47601da500065e003c85928117a
     res.sendFile(join(__dirname, '..', 'admin', 'index.html'));
 });
 
@@ -70,7 +74,11 @@ const distDir = join(__dirname, '..', 'dist');
 const publicDir = join(__dirname, '..', 'public');
 if (existsSync(distDir)) {
     app.use(express.static(distDir));
+<<<<<<< HEAD
     app.get('{*splat}', (req, res) => {
+=======
+    app.get(/^.*$/, (req, res) => {
+>>>>>>> 97f4252ba0c4d47601da500065e003c85928117a
         if (!req.path.startsWith('/api') && !req.path.startsWith('/admin')) {
             res.sendFile(join(distDir, 'index.html'));
         }

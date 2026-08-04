@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Md Abir Hassan</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; background-color: #000; font-family: 'Inter', sans-serif; color: #fff; overflow-x: hidden; }
+        canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none; }
+        #fixed-ui { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 20; pointer-events: none; }
+        .interactive { pointer-events: auto; }
+        :root { --accent: #00E5FF; }
+
+        header { position: absolute; top: 0; left: 0; width: 100%; padding: 35px 5vw; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Outfit', sans-serif; font-size: 40px; font-weight: 900; letter-spacing: -2px; text-shadow: 0 0 20px rgba(0, 229, 255, 0.4); text-decoration: none; color: #fff; }
+        .logo-x { color: var(--accent); }
+        .right-logo { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
+        .yesex-logo { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; }
+
+        .social-links { position: absolute; left: -80px; top: 50%; transform: translateY(-50%) rotate(-90deg); display: flex; gap: 30px; font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 3px; font-weight: 700; }
+        .social-links a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s, text-shadow 0.3s; }
+        .social-links a:hover { color: #fff; text-shadow: 0 0 10px var(--accent); }
+
+        footer { position: absolute; bottom: 0; left: 0; width: 100%; padding: 35px 5vw; box-sizing: border-box; display: flex; justify-content: space-between; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; }
+        .footer-left, .footer-right { display: flex; gap: 30px; flex-wrap: wrap; }
+        footer a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; }
+        footer a:hover, footer a.active { color: #fff; }
+
+        #scroll-content { position: relative; z-index: 10; }
+        .section { width: 100vw; box-sizing: border-box; padding: 60px 8vw; display: flex; flex-direction: column; justify-content: center; }
+        .section.hero { min-height: 100vh; padding-top: 0; padding-bottom: 0; }
+        .align-center { align-items: center; text-align: center; }
+        .content-wrapper { position: relative; max-width: 55vw; z-index: 2; }
+        
+        .hero-text { font-family: 'DM Serif Display', serif; font-size: 95px; font-weight: 400; line-height: 0.9; letter-spacing: 1px; text-transform: uppercase; color: #fff; margin-bottom: 25px; text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .subtitle { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 40px; }
+        
+        .card { background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02)); backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 5px 20px rgba(0,0,0,0.2); padding: 35px; border-radius: 12px; transition: all 0.3s ease; text-align: left; margin-top: 20px; width: 100%; box-sizing: border-box; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; font-size: 14px; box-sizing: border-box; outline: none; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+
+        .btn { display: inline-block; padding: 15px 35px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 30px; background: rgba(255,255,255,0.05); color: #fff; text-decoration: none; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; backdrop-filter: blur(10px); cursor: pointer; width: 100%; text-align: center; box-sizing: border-box; }
+        .btn:hover { background: rgba(0, 229, 255, 0.1); border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+
+        @media (max-width: 1024px) { .content-wrapper { max-width: 80vw; } .hero-text { font-size: 70px; } }
+        @media (max-width: 768px) { .section { padding: 40px 8vw; } .content-wrapper { max-width: 100vw; } .social-links { display: none; } footer { flex-direction: column; gap: 15px; text-align: center; } .footer-left, .footer-right { justify-content: center; } header { padding: 25px 8vw; } .hero-text { font-size: 50px; } }
+    </style>
+</head>
+<body>
+    <canvas id="animationCanvas"></canvas>
+    <div class="overlay"></div>
+    
+    <div id="fixed-ui">
+        <header class="interactive">
+            <a href="index.html" class="logo">A<span class="logo-x">H</span></a>
+            <div class="right-logo"><div class="yesex-logo">CONTACT</div></div>
+        </header>
+
+        <div class="social-links interactive">
+            <a href="https://linkedin.com/in/abirhassan">LINKEDIN</a>
+            <a href="#">GITHUB</a>
+        </div>
+
+        <footer class="interactive">
+            <div class="footer-left">
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT</a>
+                <a href="experience.html">EXPERIENCE</a>
+                <a href="qa-testing.html">QA & TESTING</a>
+                <a href="pm-details.html">PM DETAILS</a>
+                <a href="projects.html">PROJECTS</a>
+                <a href="web-dev.html">WEB DEV</a>
+                <a href="blog.html">BLOG</a>
+            </div>
+            <div class="footer-right">
+                <a href="contact.html" class="active">CONTACT</a>
+            </div>
+        </footer>
+    </div>
+
+    <div id="scroll-content">
+        <section class="section hero align-center">
+            <div class="content-wrapper">
+                <div class="hero-text">
+                    LET'S<br>
+                    CONNECT
+                </div>
+                <div class="subtitle">Get In Touch for QA, PM, & Web Engineering</div>
+
+                <div class="card">
+                    <form id="contact-form" onsubmit="submitForm(event)">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Email</label>
+                            <input type="email" id="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" id="subject" placeholder="Project Inquiry / QA Consulting" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn interactive">Send Message &rarr;</button>
+                        <div id="status-msg" style="margin-top: 15px; text-align: center; font-weight: 500; display: none;"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('animationCanvas'); const ctx = canvas.getContext('2d');
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; } resizeCanvas();
+        const frameCount = 300; const images = []; const currentFrame = index => `/assets/frames/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
+        for (let i = 1; i <= frameCount; i++) { const img = new Image(); img.src = currentFrame(i); images.push(img); }
+        let targetFrame = 0; let currentFrameIndex = 0;
+        function render(frame) {
+            const img = images[frame]; if (!img || !img.complete) return;
+            const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.drawImage(img, 0, 0, img.width, img.height, (canvas.width - img.width * ratio) / 2, (canvas.height - img.height * ratio) / 2, img.width * ratio, img.height * ratio);  
+        }
+        images[0].onload = () => render(0);
+        window.addEventListener('scroll', () => { 
+            let maxS = document.documentElement.scrollHeight - window.innerHeight; if(maxS <= 0) maxS = 1;
+            targetFrame = Math.min(frameCount - 1, Math.floor(Math.max(0, Math.min(1, document.documentElement.scrollTop / maxS)) * frameCount)); 
+        });
+        function update() { currentFrameIndex += (targetFrame - currentFrameIndex) * 0.08; render(Math.round(currentFrameIndex)); requestAnimationFrame(update); }
+        requestAnimationFrame(update); window.addEventListener('resize', () => { resizeCanvas(); render(Math.round(currentFrameIndex)); });
+
+        async function submitForm(e) {
+            e.preventDefault();
+            const msgEl = document.getElementById('status-msg');
+            msgEl.style.display = 'block';
+            msgEl.style.color = '#00E5FF';
+            msgEl.textContent = 'Sending message...';
+
+            const payload = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (res.ok) {
+                    msgEl.style.color = '#00E5FF';
+                    msgEl.textContent = '✅ Message sent successfully! I will reply soon.';
+                    document.getElementById('contact-form').reset();
+                } else {
+                    throw new Error();
+                }
+            } catch (err) {
+                msgEl.style.color = '#FF5252';
+                msgEl.textContent = '❌ Failed to send message. Please try emailing directly.';
+            }
+        }
+    </script>
+</body>
+</html>

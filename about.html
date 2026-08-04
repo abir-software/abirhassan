@@ -5,58 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Md Abir Hassan</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;700;900&display=swap" rel="stylesheet">
-    <style>
-        /* Shared Styles */
-        body { margin: 0; background-color: #000; font-family: 'Inter', sans-serif; color: #fff; overflow-x: hidden; }
-        canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none; }
-        #fixed-ui { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 20; pointer-events: none; }
-        .interactive { pointer-events: auto; }
-        :root { --accent: #00E5FF; }
-
-        header { position: absolute; top: 0; left: 0; width: 100%; padding: 35px 5vw; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Outfit', sans-serif; font-size: 40px; font-weight: 900; letter-spacing: -2px; text-shadow: 0 0 20px rgba(0, 229, 255, 0.4); text-decoration: none; color: #fff; }
-        .logo-x { color: var(--accent); }
-        .right-logo { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
-        .yesex-logo { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; }
-
-        .social-links { position: absolute; left: -80px; top: 50%; transform: translateY(-50%) rotate(-90deg); display: flex; gap: 30px; font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 3px; font-weight: 700; }
-        .social-links a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s, text-shadow 0.3s; }
-        .social-links a:hover { color: #fff; text-shadow: 0 0 10px var(--accent); }
-
-        footer { position: absolute; bottom: 0; left: 0; width: 100%; padding: 35px 5vw; box-sizing: border-box; display: flex; justify-content: space-between; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; }
-        .footer-left, .footer-right { display: flex; gap: 40px; }
-        footer a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; }
-        footer a:hover, footer a.active { color: #fff; }
-
-        /* Content Layout */
-        #scroll-content { position: relative; z-index: 10; padding-top: 150px; padding-bottom: 100px; }
-        .section { width: 100vw; box-sizing: border-box; padding: 40px 8vw; display: flex; flex-direction: column; justify-content: center; }
-        .align-right { align-items: flex-end; text-align: right; }
-        .align-left { align-items: flex-start; text-align: left; }
-        .align-center { align-items: center; text-align: center; }
-        .content-wrapper { position: relative; max-width: 45vw; z-index: 2; }
-        .align-center .content-wrapper { max-width: 60vw; }
-        
-        /* Hero & Typography (Aligned with Home) */
-        .hero-text { font-family: 'DM Serif Display', serif; font-size: 95px; font-weight: 400; line-height: 0.9; letter-spacing: 1px; text-transform: uppercase; color: #fff; margin-bottom: 25px; text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .subtitle { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 40px; }
-        
-        .section-title { font-family: 'Outfit', sans-serif; font-size: 50px; font-weight: 900; letter-spacing: -1px; color: #fff; margin-bottom: 30px; text-transform: uppercase; text-shadow: 0 5px 15px rgba(0,0,0,0.4); }
-        .section-content { font-size: 16px; font-weight: 300; line-height: 1.8; color: rgba(255,255,255,0.8); }
-        .highlight { color: var(--accent); font-weight: 600; text-shadow: 0 0 10px rgba(0, 229, 255, 0.3); }
-        
-        /* Cards */
-        .grid { display: flex; flex-direction: column; gap: 20px; margin-top: 20px; width: 100%; }
-        .card { background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02)); backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 5px 20px rgba(0,0,0,0.2); padding: 25px; border-radius: 12px; transition: all 0.3s ease; text-align: left; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2); }
-        .card-title { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-        .card-subtitle { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--accent); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
-        .card-text { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 20px; }
-
-        @media (max-width: 1024px) { .content-wrapper { max-width: 70vw; } .hero-text { font-size: 70px; } .section-title { font-size: 40px; } }
-        @media (max-width: 768px) { .section { padding: 40px 8vw; } .content-wrapper { max-width: 100vw; text-align: left; } .align-right, .align-left { align-items: flex-start; text-align: left; } .social-links { display: none; } footer { flex-direction: column; gap: 15px; text-align: center; } .footer-left, .footer-right { justify-content: center; } header { padding: 25px 8vw; } .hero-text { font-size: 50px; } }
-    </style>
+    <link rel="stylesheet" href="/assets/css/portfolio.css">
 </head>
 <body>
     <canvas id="animationCanvas"></canvas>
@@ -79,17 +28,18 @@
                 <a href="about.html" class="active">ABOUT</a>
                 <a href="experience.html">EXPERIENCE</a>
                 <a href="qa-testing.html">QA & TESTING</a>
+                <a href="pm-details.html">PM DETAILS</a>
                 <a href="projects.html">PROJECTS</a>
                 <a href="web-dev.html">WEB DEV</a>
+                <a href="blog.html">BLOG</a>
             </div>
             <div class="footer-right">
-                <a href="mailto:abirhassan@example.com">CONTACT</a>
+                <a href="contact.html">CONTACT</a>
             </div>
         </footer>
     </div>
 
     <div id="scroll-content">
-        <!-- Hero Section -->
         <section class="section hero align-right">
             <div class="content-wrapper">
                 <div class="hero-text">
@@ -120,120 +70,11 @@
                     🔹 <b>Cross-Functional Delivery:</b> Managed quality validation for 8+ commercial products (ERP, SaaS, POS, University Management Systems) and 34 Daffodil Group concerns.<br><br>
                     🔹 <b>Agile Operations:</b> Serve as the central Scrum facilitator and operational support resource, resolving day-to-day technical blockers and coordinating cross-functional teams.
                 </div>
+                <a href="experience.html" class="btn interactive">View Experience &rarr;</a>
             </div>
         </section>
-
-        <section class="section align-left">
-            <div class="content-wrapper">
-                <div class="section-title">Core Expertise</div>
-                <div class="section-content">
-                    • QA Leadership & Test Strategy<br>
-                    • Agile Scrum & Technical Project Management<br>
-                    • Functional, API, Regression & Performance Testing<br>
-                    • Test Automation (Cypress, JMeter) & AI Workflows<br>
-                    • SDLC/STLC & Defect Lifecycle Management<br>
-                    • Stakeholder Communication & Operational Coordination
-                    <br><br>
-                    <span class="highlight">Open to dynamic opportunities in QA Leadership, Technical Project Management (TPM), Product Ownership, and Delivery Management where technical excellence meets strategic execution.</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="section align-right">
-            <div class="content-wrapper">
-                <div class="section-title">Career Journey</div>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-title">Software Engineer (QA & Operations)</div>
-                        <div class="card-subtitle">Daffodil Software Limited (DSL) | July 2026 – Present</div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title">Software Engineer (Jr)</div>
-                        <div class="card-subtitle">Daffodil Software Limited (DSL) | Feb 2024 – Jun 2026</div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title">Assistant Administrative Officer</div>
-                        <div class="card-subtitle">Dept. of Compliance Cell — Daffodil Family | Jun 2022 – Jan 2024</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="section align-left">
-            <div class="content-wrapper">
-                <div class="section-title">Education</div>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-title">MBA in Management Information Systems (MIS)</div>
-                        <div class="card-subtitle">Daffodil International University | 2023 – 2025</div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title">BSc in Computer Science and Engineering (CSE)</div>
-                        <div class="card-subtitle">Daffodil International University | 2018 – 2021</div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title">Higher Secondary Certificate</div>
-                        <div class="card-subtitle">Govt. Nazmul Smriti College | 2015 - 2016 (Science)</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section align-right">
-            <div class="content-wrapper">
-                <div class="section-title">Professional Certifications</div>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-title">PMP Certification</div>
-                        <div class="card-subtitle">Project Management Institute</div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title">Software Testing & QA</div>
-                        <div class="card-subtitle">Professional Certification</div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title">Agile & Project Management</div>
-                        <div class="card-subtitle">Agile Alliance</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
     </div>
 
-    <!-- Animation Script -->
-    <script>
-        const canvas = document.getElementById('animationCanvas');
-        const ctx = canvas.getContext('2d');
-        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        resizeCanvas();
-        const frameCount = 300;
-        const images = [];
-        const frameCount = 300; const images = []; const currentFrame = index => `/assets/frames/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
-        for (let i = 1; i <= frameCount; i++) {
-            const img = new Image(); img.src = currentFrame(i); images.push(img);
-        }
-        let targetFrame = 0; let currentFrameIndex = 0;
-        function render(frame) {
-            const img = images[frame]; if (!img || !img.complete) return;
-            const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
-            const cx = (canvas.width - img.width * ratio) / 2;
-            const cy = (canvas.height - img.height * ratio) / 2;  
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0, img.width, img.height, cx, cy, img.width * ratio, img.height * ratio);  
-        }
-        images[0].onload = () => render(0);
-        window.addEventListener('scroll', () => {
-            let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            if (maxScroll <= 0) maxScroll = 1;
-            targetFrame = Math.min(frameCount - 1, Math.floor(Math.max(0, Math.min(1, document.documentElement.scrollTop / maxScroll)) * frameCount));
-        });
-        function update() {
-            currentFrameIndex += (targetFrame - currentFrameIndex) * 0.08;
-            render(Math.round(currentFrameIndex)); requestAnimationFrame(update);
-        }
-        requestAnimationFrame(update);
-        window.addEventListener('resize', () => { resizeCanvas(); render(Math.round(currentFrameIndex)); });
-    </script>
+    <script src="/assets/js/canvas-animation.js"></script>
 </body>
 </html>
