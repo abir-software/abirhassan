@@ -269,6 +269,8 @@
         });
 
         const pointerWrapEl = cursorEl.querySelector('.cursor-pointer-wrap');
+        const BASE_UPRIGHT_ANGLE = -35; // Sets cursor to ~80-degree steep upright orientation
+        let currentRotation = BASE_UPRIGHT_ANGLE;
 
         function animLoop() {
             if (isVisible) {
@@ -276,7 +278,7 @@
                 cursorEl.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
 
                 if (prefersReducedMotion) {
-                    currentRotation = 0;
+                    currentRotation = BASE_UPRIGHT_ANGLE;
                 } else {
                     const vx = mouseX - prevMouseX;
                     const vy = mouseY - prevMouseY;
@@ -287,9 +289,10 @@
                     if (velocity > 1) {
                         const targetAngle = Math.atan2(vy, vx) * (180 / Math.PI) - 45;
                         const clampedAngle = Math.max(-20, Math.min(20, targetAngle));
-                        currentRotation += (clampedAngle - currentRotation) * 0.15;
+                        const destAngle = BASE_UPRIGHT_ANGLE + clampedAngle;
+                        currentRotation += (destAngle - currentRotation) * 0.15;
                     } else {
-                        currentRotation += (0 - currentRotation) * 0.1;
+                        currentRotation += (BASE_UPRIGHT_ANGLE - currentRotation) * 0.1;
                     }
                 }
 
