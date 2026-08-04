@@ -235,6 +235,42 @@
         if (settings.accent_color) root.style.setProperty('--accent-color', settings.accent_color);
     }
 
+    // ─── 6. POPULATE EDUCATION & CERTIFICATIONS ──────────────
+    async function loadEducationData() {
+        const data = await fetchAPI('/education');
+        if (!data) return;
+
+        // Education Grid on About Page
+        const eduGridEl = document.querySelector('.section.education .waterdrop-grid');
+        if (eduGridEl && Array.isArray(data.education) && data.education.length > 0) {
+            eduGridEl.innerHTML = data.education.map(item => `
+                <div class="waterdrop-card interactive">
+                    <div class="waterdrop-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="#00E5FF"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+                    </div>
+                    <div class="waterdrop-title">${escapeHTML(item.degree || '')}</div>
+                    <div class="waterdrop-subtitle">${escapeHTML(item.school || '')}</div>
+                    <div class="waterdrop-desc">${escapeHTML(item.date || '')} ${item.detail ? `· ${escapeHTML(item.detail)}` : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        // Certifications Grid on About Page
+        const certGridEl = document.querySelector('.section.certifications .waterdrop-grid');
+        if (certGridEl && Array.isArray(data.certifications) && data.certifications.length > 0) {
+            certGridEl.innerHTML = data.certifications.map(item => `
+                <div class="waterdrop-card interactive">
+                    <div class="waterdrop-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="#00E5FF"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                    </div>
+                    <div class="waterdrop-title">${escapeHTML(item.name || '')}</div>
+                    <div class="waterdrop-subtitle">${escapeHTML(item.issuer || '')}</div>
+                    <div class="waterdrop-desc">${escapeHTML(item.detail || 'Professional Certification')}</div>
+                </div>
+            `).join('');
+        }
+    }
+
     // Helper HTML escape
     function escapeHTML(str) {
         return String(str || '')
@@ -251,6 +287,7 @@
         loadSkillsData();
         loadExperienceData();
         loadProjectsData();
+        loadEducationData();
         loadSettingsData();
     });
 })();
