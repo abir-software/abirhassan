@@ -2069,3 +2069,142 @@ footer.transparent-footer {
   transform: scale(1.5);
 }
 
+/* ==========================================================================
+   CREATIVE KEY IMPACTS AT DSL 3D GLASS MATRIX
+   ========================================================================== */
+
+.impact-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 25px;
+  margin-bottom: 35px;
+}
+
+@media (max-width: 768px) {
+  .impact-matrix-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+.impact-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.003) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  padding: 26px;
+  box-shadow: 
+    inset 1.5px 1.5px 6px rgba(255, 255, 255, 0.2),
+    inset -1.5px -1.5px 6px rgba(0, 0, 0, 0.35),
+    0 8px 25px rgba(0, 0, 0, 0.25);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: left;
+  overflow: hidden;
+}
+
+.impact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #00E5FF, #3B82F6, #EC4899);
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+
+.impact-card:hover {
+  transform: translateY(-5px);
+  background: rgba(10, 16, 28, 0.35) !important;
+  border-color: rgba(0, 229, 255, 0.5);
+  box-shadow: 
+    inset 1.5px 1.5px 8px rgba(255, 255, 255, 0.25),
+    0 14px 35px rgba(0, 0, 0, 0.4),
+    0 0 22px rgba(0, 229, 255, 0.25);
+}
+
+.impact-card:hover::before {
+  opacity: 1;
+}
+
+.impact-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.impact-icon-ring {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.impact-card:hover .impact-icon-ring {
+  transform: scale(1.1) rotate(5deg);
+  background: rgba(0, 229, 255, 0.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.35);
+}
+
+.impact-badge {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(0, 229, 255, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.impact-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+.impact-stats-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.impact-stat-pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 2px 9px;
+  border-radius: 10px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.impact-desc {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.92);
+}
+
